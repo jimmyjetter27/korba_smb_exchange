@@ -464,7 +464,7 @@ class XChangeV1 extends API
     public function mtn_bundles($filter = null)
     {
         $result = $this->call('get_mtndata_product_id/', []);
-        Log::debug($result);
+        Log::debug(json_encode($result));
         $list = [];
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles']['bundles'] as $bundle) {
