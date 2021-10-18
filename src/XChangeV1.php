@@ -20,8 +20,8 @@ class XChangeV1 extends API
     protected $secret_key;
     protected $client_key;
     protected $client_id;
-//    protected static $live_url = 'https://xchange.korba365.com/api/v1.0/'; // live url has been changed
-    protected static $live_url = 'https://xchange.korbaweb.com/api/v1.0';
+    protected static $live_url = 'https://xchange.korba365.com/api/v1.0/'; // live url has been changed (Gideon's)
+//    protected static $live_url = 'https://xchange.korbaweb.com/api/v1.0'; // Cyber Sai's url
     protected static $test_url = 'https://korba-xchange.herokuapp.com/api/v1.0';
     protected static $aws_url = 'http://internal-awseb-e-e-awsebloa-kxexw3t2bgt7-1521297916.eu-west-1.elb.amazonaws.com/api/v1.0';
 
