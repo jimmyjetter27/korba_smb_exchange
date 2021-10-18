@@ -1,5 +1,5 @@
 {
-    "name": "james/korba-smb-exchange",
+    "name": "jimmyjetter/korba-smb-exchange",
     "description": "Connects Korba-SMB to Xchange",
     "type": "library",
     "require": {
