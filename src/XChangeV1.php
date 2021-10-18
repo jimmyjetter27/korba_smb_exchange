@@ -465,7 +465,7 @@ class XChangeV1 extends API
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles'] as $bundle) {
                 array_push($list, [
-//                    'id' => $bundle['product_id'],
+                    'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
                     'description' => $bundle['name'],
                     'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
