@@ -339,6 +339,7 @@ class XChangeV1 extends API
         $data = [
             'customer_number' => $customer_number
         ];
+//        $result = $this->call('get_updated_busy_bundles/', $data);
         $result = $this->call('get_updated_busy_bundles/', $data);
         if (isset($result['success']) && $result['success']) {
             $list = [];
@@ -459,7 +460,7 @@ class XChangeV1 extends API
 
     public function mtn_bundles($filter = null)
     {
-        $result = $this->call('get_mtndata_product_id/', []);
+        $result = $this->call('get_mtndata_product_id', []);
         $list = [];
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles'] as $bundle) {
