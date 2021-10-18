@@ -10,6 +10,7 @@
  */
 namespace JimmyJetter\SmbExchange;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -465,8 +466,8 @@ class XChangeV1 extends API
     {
         $result = $this->call('get_mtndata_product_id/', []);
         Log::debug(json_encode($result));
-        $bundles = $result['bundles'];
-        dd(json_encode($bundles['name']));
+        $bundles = $result['bundles.name'];
+        dd(Arr::get($bundles, 'bundles'));
         $list = [];
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles']['bundles'] as $bundle) {
