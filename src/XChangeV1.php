@@ -465,7 +465,7 @@ class XChangeV1 extends API
     {
         $result = $this->call('get_mtndata_product_id/', []);
         Log::debug(json_encode($result));
-        dd($result);
+        dd("Data type:".gettype($result)." ".json_encode($result));
         $list = [];
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles']['bundles'] as $bundle) {
