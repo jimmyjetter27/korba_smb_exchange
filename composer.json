@@ -1,0 +1,22 @@
+{
+    "name": "james/korba-smb-exchange",
+    "description": "Connects Korba-SMB to Xchange",
+    "type": "library",
+    "require": {
+        "jms/serializer": "3.x-dev",
+        "phpdocumentor/phpdocumentor": "^3.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "James\\KorbaSmbExchange\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jimmyjetter27",
+            "email": "jimmyjetter27@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
