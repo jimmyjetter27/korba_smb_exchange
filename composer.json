@@ -2,15 +2,6 @@
     "name": "jimmyjetter/korba-smb-exchange",
     "description": "Connects Korba-SMB to Xchange",
     "type": "library",
-    "require": {
-        "ext-json": "*",
-        "ext-curl": "*",
-
-    },
-    "require-dev": {
-        "jms/serializer": "1.7.*",
-        "phpdocumentor/phpdocumentor": "^2.9"
-    },
     "license": "MIT",
     "autoload": {
         "classmap": [
@@ -23,5 +14,13 @@
             "email": "jimmyjetter27@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable",
+    "require": {
+        "ext-json": "*",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "jms-serializer/serializer": "1.7.*",
+        "phpdocumentor/phpdocumentor": "^2.9"
+    }
 }
