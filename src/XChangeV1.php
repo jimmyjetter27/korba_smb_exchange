@@ -813,8 +813,10 @@ class XChangeV1 extends API
             'bill_type' => $bill_type,
             'transaction_id' => $transaction_id
         ];
-        Log::debug(json_encode($data));
-        return $this->call('new_etransact_validate_user/', $data);
+//        return $this->call('new_etransact_validate_user/', $data);
+        $result = $this->call('new_etransact_validate_user/', $data);
+        Log::debug(json_encode($result));
+        dd($result);
     }
 
     public function etransact_pay(
