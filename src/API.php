@@ -7,8 +7,8 @@
  * @author Isaac Adzah Sai <isaacsai030@gmail.com>
  * @version 2.5.2
  */
-namespace JimmyJetter\SmbExchange;
-
+//namespace JimmyJetter\SmbExchange;
+namespace Korba;
 /**
  * Class API helps access API quickly.
  * A class to help quickly make request to api endpoints.

@@ -8,7 +8,9 @@
  * @author Isaac Adzah Sai <isaacsai030@gmail.com>
  * @version 2.5.2
  */
-namespace JimmyJetter\SmbExchange;
+
+//namespace JimmyJetter\SmbExchange;
+namespace Korba;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;

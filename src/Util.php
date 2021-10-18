@@ -7,8 +7,8 @@
  * @author Isaac Adzah Sai <isaacsai030@gmail.com>
  * @version 2.5.2
  */
-namespace JimmyJetter\SmbExchange;
-
+//namespace JimmyJetter\SmbExchange;
+namespace Korba;
 /**
  * Class Util is a helper class.
  * A class with function and constant to help easily create USSD.
