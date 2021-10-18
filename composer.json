@@ -13,9 +13,9 @@
     },
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "James\\KorbaSmbExchange\\": "src/"
-        }
+        "classmap": [
+            "src/"
+        ]
     },
     "authors": [
         {
