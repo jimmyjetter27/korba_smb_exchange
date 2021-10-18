@@ -322,6 +322,7 @@ class XChangeV1 extends API
             'customer_number' => $customer_number
         ];
         $result = $this->call('get_updated_busy_bundles/', $data);
+        Log::debug(json_encode($result));
         if (isset($result['success']) && $result['success'] == true) {
             $list = [];
             foreach ($result['data']['list'] as $bundles) {
