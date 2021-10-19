@@ -472,7 +472,7 @@ class XChangeV1 extends API
         $list = [];
         if (isset($result['success']) && $result['success']) {
 //            foreach ($result['bundles'][0]['bundles'] as $bundle) {
-            foreach ($result['bundles'] as $bundle) {
+            foreach ($result['bundles'][0] as $bundle) {
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
