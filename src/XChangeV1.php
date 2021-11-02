@@ -41,9 +41,11 @@ class XChangeV1 extends API
         if ($mode == 'aws') {
             $url = XChangeV1::$aws_url;
         } else if ($mode == 'test') {
-            $url = XChangeV1::$test_url;
+//            $url = XChangeV1::$test_url;
+            $url = env('TEST_URL');
         } else {
-            $url = XChangeV1::$live_url;
+//            $url = XChangeV1::$live_url;
+            $url = env('LIVE_URL');
         }
         parent::__construct($url, $headers, $proxy);
         $this->secret_key = $secret_key;
