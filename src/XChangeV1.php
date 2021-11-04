@@ -468,7 +468,7 @@ class XChangeV1 extends API
             $description, $payer_name, $extra_info);
 
         $mtn_callback_data = ['callback stuff' => $data];
-        Log::debug(json_encode($data));
+        Log::debug(json_encode($mtn_callback_data));
 
         return $this->call('mtn_data_topup/', $data);
     }
