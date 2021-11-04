@@ -101,7 +101,7 @@ class XChangeV1 extends API
         $checking = ['data' => [
             $data
         ]];
-        Log::debug($checking);
+        Log::debug(json_encode($checking));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
