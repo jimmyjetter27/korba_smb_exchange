@@ -98,10 +98,6 @@ class XChangeV1 extends API
             'extra_info' => $extra_info
         ];
 
-        $checking = ['data' => [
-            $data
-        ]];
-        Log::debug(json_encode($checking));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
@@ -466,10 +462,6 @@ class XChangeV1 extends API
         $data = $this->internet_product_data(
             $customer_number, $transaction_id, $product_id, $amount, $callback_url,
             $description, $payer_name, $extra_info);
-
-        $mtn_callback_data = ['callback stuff' => $data];
-        Log::debug(json_encode($mtn_callback_data));
-
         return $this->call('mtn_data_topup/', $data);
     }
 
