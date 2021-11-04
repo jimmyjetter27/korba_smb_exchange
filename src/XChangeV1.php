@@ -97,7 +97,11 @@ class XChangeV1 extends API
             'payer_name' => $payer_name,
             'extra_info' => $extra_info
         ];
-        Log::debug(json_encode($data));
+
+        $checking = ['data' => [
+            $data
+        ]];
+        Log::debug($checking);
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
