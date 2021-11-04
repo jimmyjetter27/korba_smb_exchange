@@ -97,6 +97,7 @@ class XChangeV1 extends API
             'payer_name' => $payer_name,
             'extra_info' => $extra_info
         ];
+        Log::debug(json_encode('collection', $data, $opt_data));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
@@ -461,6 +462,7 @@ class XChangeV1 extends API
         $data = $this->internet_product_data(
             $customer_number, $transaction_id, $product_id, $amount, $callback_url,
             $description, $payer_name, $extra_info);
+        Log::debug(json_encode('mtn data topup', $data));
         return $this->call('mtn_data_topup/', $data);
     }
 
