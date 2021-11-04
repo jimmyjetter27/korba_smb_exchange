@@ -466,9 +466,10 @@ class XChangeV1 extends API
         $data = $this->internet_product_data(
             $customer_number, $transaction_id, $product_id, $amount, $callback_url,
             $description, $payer_name, $extra_info);
+
+        $mtn_callback_data = ['callback stuff' => $data];
         Log::debug(json_encode($data));
 
-        dd($data);
         return $this->call('mtn_data_topup/', $data);
     }
 
