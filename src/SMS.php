@@ -24,9 +24,9 @@ class SMS extends API
      */
     public function __construct($base_url, $username, $password, $global_from = null)
     {
-        $authorization = base64_encode("{$username}:{$password}");
+//        $authorization = base64_encode("{$username}:{$password}");
         $headers = [
-            'Authorization: Basic '.$authorization,
+            'Authorization: Token '.env('SMS_AUTH_TOKEN'),
             'Content-Type: application/json',
             'Accept: application/json'
         ];
@@ -53,6 +53,6 @@ class SMS extends API
             'text' => $text
         ];
         $data['from'] = $from == null ? $this->global_from : $from;
-        return $this->call('/sms/2/text/single', $data);
+        return $this->call('/send_sms/', $data);
     }
 }
