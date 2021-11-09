@@ -677,7 +677,7 @@ class XChangeV1 extends API
     public function airteltigo_bundles($filter = null)
     {
 //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
-        $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint
+        $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
         $list = [];
         if (isset($result['success']) && $result['success']) {
             foreach ($result['results'] as $result) {
