@@ -685,7 +685,7 @@ class XChangeV1 extends API
                     array_push($list, [
                         'id' => $bundle['product_id'],
                         'price' => $bundle['amount'],
-                        'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
+                        'description' => $result['name'] == 'XTRA_UNLIMITED_CALLS' ?
                             "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
                             "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                         'size' => $bundle['name'],
