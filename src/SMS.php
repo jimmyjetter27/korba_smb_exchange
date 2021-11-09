@@ -53,6 +53,37 @@ class SMS extends API
             'text' => $text
         ];
         $data['from'] = $from == null ? $this->global_from : $from;
-        return $this->call('/send_sms/', $data);
+//        return $this->call('/send_sms/', $data);
+        return $this->sending($to, $text);
+    }
+
+    public function sending($to, $text)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => env('SMS_BASE_URL'),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+    "phone_number": "'.$to.'",
+    "message":"'.$text.'",
+    "sender_id":"KorbaSMB"
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Token '.env('SMS_AUTH_TOKEN'),
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+//        echo $response;
     }
 }
