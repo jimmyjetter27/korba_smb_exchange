@@ -680,6 +680,7 @@ class XChangeV1 extends API
         $result = $this->call('get_airteltigo_internet_bundles/', []);
         $list = [];
         if (isset($result['success']) && $result['success']) {
+            dd($result);
             foreach ($result['bundles'] as $bundle) {
                 array_push($list, [
                     'id' => $bundle['product_id'],
