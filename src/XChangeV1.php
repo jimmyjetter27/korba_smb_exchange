@@ -679,9 +679,10 @@ class XChangeV1 extends API
         $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint
         $list = [];
+        return response()->json($result);
         if (isset($result['success']) && $result['success']) {
-            foreach ($result as $bundle) {
-                return $bundle;
+            foreach ($result['results'] as $bundle) {
+                return $bundle
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
