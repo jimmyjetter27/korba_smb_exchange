@@ -682,7 +682,6 @@ class XChangeV1 extends API
         dd(response()->json($result));
         if (isset($result['success']) && $result['success']) {
             foreach ($result['results'] as $bundle) {
-                return $bundle
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
