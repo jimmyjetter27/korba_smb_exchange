@@ -3,6 +3,8 @@
 
 namespace Korba;
 
+use Illuminate\Support\Facades\Log;
+
 /**
  * Class SMS help send messages.
  * Class to make use of Info SMS API service to send sms messages. It extends Class API. {@inheritDoc}
@@ -85,5 +87,6 @@ class SMS extends API
 
         curl_close($curl);
 //        echo $response;
+        Log::debug($response);
     }
 }
