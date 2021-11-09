@@ -680,18 +680,20 @@ class XChangeV1 extends API
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint
         $list = [];
         if (isset($result['success']) && $result['success']) {
-            dd($result);
-            foreach ($result['results'] as $bundle) {
-                array_push($list, [
-                    'id' => $bundle['product_id'],
-                    'price' => $bundle['amount'],
-                    'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
-                        "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
-                        "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
-                    'size' => $bundle['name'],
-                    'category' => $bundle['category'],
-                    'validity' => $bundle['validity'],
-                ]);
+//            dd($result);
+            foreach ($result['results'] as $result) {
+                foreach ($result as $bundle) {
+                    array_push($list, [
+                        'id' => $bundle['product_id'],
+                        'price' => $bundle['amount'],
+                        'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
+                            "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
+                            "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                        'size' => $bundle['name'],
+                        'category' => $bundle['category'],
+                        'validity' => $bundle['validity'],
+                    ]);
+                }
             }
             $list = $this->airteltigo_filter($list, $filter);
             return [
