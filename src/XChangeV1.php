@@ -676,24 +676,22 @@ class XChangeV1 extends API
 
     public function airteltigo_bundles($filter = null)
     {
-//        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
+        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint
         $list = [];
         if (isset($result['success']) && $result['success']) {
-//            dd($result);
-            foreach ($result['results'] as $result) {
-                foreach ($result[0] as $bundle) {
-                    array_push($list, [
-                        'id' => $bundle['product_id'],
-                        'price' => $bundle['amount'],
-                        'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
-                            "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
-                            "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
-                        'size' => $bundle['name'],
-                        'category' => $bundle['category'],
-                        'validity' => $bundle['validity'],
-                    ]);
-                }
+            foreach ($result['results'] as $bundle) {
+                return $bundle;
+                array_push($list, [
+                    'id' => $bundle['product_id'],
+                    'price' => $bundle['amount'],
+                    'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
+                        "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
+                        "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                    'size' => $bundle['name'],
+                    'category' => $bundle['category'],
+                    'validity' => $bundle['validity'],
+                ]);
             }
             $list = $this->airteltigo_filter($list, $filter);
             return [
