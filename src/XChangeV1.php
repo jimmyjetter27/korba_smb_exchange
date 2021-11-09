@@ -689,7 +689,7 @@ class XChangeV1 extends API
                             "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
                             "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                         'size' => $bundle['name'],
-                        'category' => $bundle['category'],
+//                        'category' => $bundle['category'],
                         'validity' => $bundle['validity'],
                     ]);
                 }
