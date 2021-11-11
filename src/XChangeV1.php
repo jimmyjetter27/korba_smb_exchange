@@ -682,9 +682,12 @@ class XChangeV1 extends API
         if (isset($result['success']) && $result['success']) {
 //            return $result;
             foreach ($result['results'] as $result) {
+                array_push($list, [
+                    'package_name' => $result['name']
+                ]);
                 foreach ($result['bundles'] as $bundle) {
                     array_push($list, [
-                        'package_name' => $result['name'],
+//                        'package_name' => $result['name'], // eg, morning rush
                         'id' => $bundle['product_id'],
                         'price' => $bundle['amount'],
                         'description' => $result['name'] == 'XTRA_UNLIMITED_CALLS' ?
