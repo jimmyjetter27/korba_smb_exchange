@@ -46,6 +46,6 @@ class SMS extends API
             'text' => $text
         ];
         $data['from'] = $from == null ? $this->global_from : $from;
-        return $this->call('/send_sms/', $data);
+        return $this->call('/send_sms', $data);
     }
 }
