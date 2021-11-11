@@ -705,6 +705,43 @@ class XChangeV1 extends API
         return $result;
     }
 
+    public function airteltigo_xtraUnlimited_bundles($filter = null)
+    {
+        $result = $this->call('get_airteltigodata_product_id/', []);
+        $list = [];
+        if (isset($result['success']) && $result['success']) {
+            foreach ($result['bundles'] as $bundle) {
+                array_push($list, [
+                    'id' => $bundle['product_id'],
+                    'price' => $bundle['amount'],
+                    'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
+                        "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
+                        "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                    'size' => $bundle['name'],
+                    'category' => $bundle['category'],
+                    'validity' => $bundle['validity'],
+                ]);
+            }
+            $list = $this->airteltigo_filter($list, $filter);
+            return [
+                'success' => true,
+                'bundles' => $list
+            ];
+        }
+        return $result;
+    }
+
+    private function airteltigo_filter($bundles, $filter)
+    {
+        if ($filter != null && in_array($filter, ['BIGTIME', 'SIKA_KOKOOR', 'XTRA_UNLIMITED_CALLS'])) {
+            $result = array_filter($bundles, function ($product) use ($filter) {
+                return $product['category'] == $filter;
+            });
+            return array_values($result);
+        }
+        return $bundles;
+    }
+
     private function airteltigo_filter($bundles, $filter)
     {
         if ($filter != null && in_array($filter, ['BIGTIME', 'SIKA_KOKOOR', 'XTRA_UNLIMITED_CALLS'])) {
