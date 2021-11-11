@@ -705,7 +705,7 @@ class XChangeV1 extends API
         return $result;
     }
 
-    public function airteltigo_xtraUnlimited_bundles($filter = null)
+    public function airteltigo_xtraUnlimited_bundles($filter = 'XTRA_UNLIMITED_CALLS')
     {
         $result = $this->call('get_airteltigodata_product_id/', []);
         $list = [];
@@ -729,17 +729,6 @@ class XChangeV1 extends API
             ];
         }
         return $result;
-    }
-
-    private function airteltigo_filter($bundles, $filter)
-    {
-        if ($filter != null && in_array($filter, ['BIGTIME', 'SIKA_KOKOOR', 'XTRA_UNLIMITED_CALLS'])) {
-            $result = array_filter($bundles, function ($product) use ($filter) {
-                return $product['category'] == $filter;
-            });
-            return array_values($result);
-        }
-        return $bundles;
     }
 
     private function airteltigo_filter($bundles, $filter)
