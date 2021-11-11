@@ -676,6 +676,37 @@ class XChangeV1 extends API
 
     public function airteltigo_bundles($filter = null)
     {
+//        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
+        $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
+        $list = [];
+        if (isset($result['success']) && $result['success']) {
+//            return $result;
+            foreach ($result['results'] as $result) {
+                foreach ($result['bundles'] as $bundle) {
+                    array_push($list, [
+                        'package_name' => $result['name'], // eg, morning rush
+                        'product_id' => $bundle['product_id'],
+                        'amount' => $bundle['amount'],
+                        'description' => $result['name'] == 'XTRA_UNLIMITED_CALLS' ?
+                            "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
+                            "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                        'size' => $bundle['name'],
+//                        'category' => $bundle['category'],
+                        'validity' => $bundle['validity'],
+                    ]);
+                }
+            }
+            $list = $this->airteltigo_filter($list, $filter);
+            return [
+                'success' => true,
+                'bundles' => $list
+            ];
+        }
+        return $result;
+    }
+
+    public function airteltigo_xtraUnlimited_bundles($filter = 'XTRA_UNLIMITED_CALLS')
+    {
         $result = $this->call('get_airteltigodata_product_id/', []);
         $list = [];
         if (isset($result['success']) && $result['success']) {
