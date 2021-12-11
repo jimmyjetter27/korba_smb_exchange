@@ -89,14 +89,14 @@ class XChangeV1 extends API
             'amount' => $amount,
             'transaction_id' => $transaction_id,
             'network_code' => $network_code,
-            'callback_url' => $callback_url
+            'callback_url' => $callback_url,
+            'delay' => $delay
         ];
         $opt_data = [
             'vodafone_voucher_code' => $vodafone_voucher_code,
             'description' => $description,
             'payer_name' => $payer_name,
             'extra_info' => $extra_info,
-            'delay' => $delay
         ];
 
         $this->add_optional_data($data, $opt_data);
