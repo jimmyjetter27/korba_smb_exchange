@@ -82,7 +82,7 @@ class XChangeV1 extends API
 
     public function collect(
         $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $vodafone_voucher_code = null, $description = null, $payer_name = null, $extra_info = null)
+        $vodafone_voucher_code = null, $description = null, $payer_name = null, $extra_info = null, $delay = true)
     {
         $data = [
             'customer_number' => Util::numberGHFormat($customer_number),
@@ -95,7 +95,8 @@ class XChangeV1 extends API
             'vodafone_voucher_code' => $vodafone_voucher_code,
             'description' => $description,
             'payer_name' => $payer_name,
-            'extra_info' => $extra_info
+            'extra_info' => $extra_info,
+            'delay' => $delay
         ];
 
         $this->add_optional_data($data, $opt_data);
