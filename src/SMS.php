@@ -44,7 +44,7 @@ class SMS extends API
      * @param string|null $from Name of the send. if null will fallback to global_from
      * @return bool|string
      */
-    public function send($text, $to, $from = null)
+    public function sending($text, $to, $from = null)
     {
         $formatter = function ($value) {
             return Util::numberIntFormat($value);
@@ -59,7 +59,7 @@ class SMS extends API
         return $this->sending($to, $text);
     }
 
-    public function sending($to, $text)
+    public function send($to, $text)
     {
         $curl = curl_init();
 
@@ -73,7 +73,7 @@ class SMS extends API
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS =>'{
-    "phone_number": "'.$to.'",
+    "phone_number": "'.Util::number233Format($to).'",
     "message":"'.$text.'",
     "sender_id":"KorbaSMB"
 }',
