@@ -3,6 +3,8 @@
 
 namespace Korba;
 
+use App\Util\Helper;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -61,32 +63,20 @@ class SMS extends API
 
     public function send($to, $text)
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('SMS_BASE_URL'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS =>'{
-    "phone_number": "'.Util::numberIntFormat($to).'",
-    "message":"'.$text.'",
-    "sender_id":"KorbaSMB"
-}',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Token '.env('SMS_AUTH_TOKEN'),
-                'Content-Type: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-//        echo $response;
-        Log::debug($response);
+        $changeNumberFormat = Util::numberIntFormat($to);
+        $response = Http::withHeaders([
+            'Authorization' => 'Token ' . env('SMS_AUTH_TOKEN'),
+            'Content-Type' => 'application/json'
+        ])
+            ->withOptions([
+                'debug' => fopen('php://stderr', 'w'),
+                'verify' => false
+            ])
+            ->post(env('SMS_BASE_URL'), [
+                'phone_number' => $changeNumberFormat,
+                'message' => $text,
+                'sender_id' => 'KorbaSMB'
+            ]);
+        Log::debug('logging response:'.json_encode($response));
     }
 }
