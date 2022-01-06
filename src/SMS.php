@@ -77,6 +77,6 @@ class SMS extends API
                 'message' => $text,
                 'sender_id' => 'KorbaSMB'
             ]);
-        Log::debug('logging response:'.json_decode($response));
+        Log::debug(json_decode($response));
     }
 }
