@@ -49,7 +49,7 @@ class SMS extends API
         $formatter = function ($value) {
             return Util::numberIntFormat($value);
         };
-        $to = gettype($to) == 'array' ? array_map($formatter, $to) : Util::numberIntFormat($to);
+        $to = gettype($to) == 'array' ? array_map($formatter, $to) : Util::number233Format($to);
         $data = [
             'to' => $to,
             'text' => $text
