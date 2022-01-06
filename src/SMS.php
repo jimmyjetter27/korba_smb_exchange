@@ -73,7 +73,7 @@ class SMS extends API
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS =>'{
-    "phone_number": "'.Util::number233Format($to).'",
+    "phone_number": "'.Util::numberIntFormat($to).'",
     "message":"'.$text.'",
     "sender_id":"KorbaSMB"
 }',
