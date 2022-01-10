@@ -3,9 +3,9 @@
 
 namespace Korba;
 
-use App\Util\Helper;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Korba\Util;
 
 /**
  * Class SMS help send messages.
@@ -63,7 +63,7 @@ class SMS extends API
 
     public function send($message, $phoneNumber)
     {
-        $changeNumberFormat = Util::numberIntFormat($phoneNumber);
+        $changeNumberFormat = self::numberIntFormat($phoneNumber);
         error_log('logging phone number being sent');
         error_log($changeNumberFormat);
         return $response = Http::withHeaders([
@@ -79,5 +79,12 @@ class SMS extends API
                 'message' => $message,
                 'sender_id' => 'KorbaSMB'
             ]);
+    }
+
+    public function numberIntFormat($gh_number) {
+        if (preg_match('/^0/', $gh_number)) {
+            return preg_replace('/^0/', '+233', $gh_number);
+        }
+        return preg_replace('/^233/', '+233', $gh_number);
     }
 }
