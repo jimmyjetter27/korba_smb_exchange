@@ -61,10 +61,12 @@ class SMS extends API
         return $this->sending($to, $text);
     }
 
-    public function send($to, $text)
+    public function send($message, $phoneNumber)
     {
-        $changeNumberFormat = Util::number233Format($to);
-        $response = Http::withHeaders([
+        $changeNumberFormat = Util::numberIntFormat($phoneNumber);
+        error_log('logging phone number being sent');
+        error_log($changeNumberFormat);
+        return $response = Http::withHeaders([
             'Authorization' => 'Token ' . env('SMS_AUTH_TOKEN'),
             'Content-Type' => 'application/json'
         ])
@@ -74,9 +76,8 @@ class SMS extends API
             ])
             ->post(env('SMS_BASE_URL'), [
                 'phone_number' => $changeNumberFormat,
-                'message' => $text,
+                'message' => $message,
                 'sender_id' => 'KorbaSMB'
             ]);
-        Log::debug(json_decode($response));
     }
 }
