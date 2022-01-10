@@ -64,6 +64,8 @@ class SMS extends API
     public function send($to, $text)
     {
         $changeNumberFormat = Util::number233Format($to);
+        Log::error('phone number');
+        Log::error($changeNumberFormat);
         $response = Http::withHeaders([
             'Authorization' => 'Token ' . env('SMS_AUTH_TOKEN'),
             'Content-Type' => 'application/json'
