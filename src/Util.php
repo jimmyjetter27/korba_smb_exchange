@@ -205,6 +205,18 @@ final class Util
         return preg_match("/^[0][0-9]{9}$/", $number) ? true : false;
     }
 
+    public static function verify233Format($phoneNumber)
+    {
+        $phoneNumber = (int)$phoneNumber;
+        return is_int($phoneNumber) && str_starts_with($phoneNumber, '233') && strlen($phoneNumber) == 12;
+    }
+
+    public static function verifyGHFormat($phoneNumber)
+    {
+//        return strlen($phoneNumber) == 10;
+        return preg_match("/^[0][0-9]{9}$/", $phoneNumber) && str_starts_with($phoneNumber, '0') && strlen($phoneNumber) == 10;
+    }
+
     /**
      * Util public static function verifyNumberLength.
      * It verifies if a number is exactly a particular length
