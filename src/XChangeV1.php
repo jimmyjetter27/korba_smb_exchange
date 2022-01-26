@@ -685,25 +685,16 @@ class XChangeV1 extends API
 //            return $result;
             foreach ($result['results'] as $result) {
                 foreach ($result['bundles'] as $bundle) {
-                    if ($bundle['validity'] == null) {
                         array_push($list, [
                             'package_name' => $result['name'], // eg, morning rush
                             'product_id' => $bundle['product_id'],
                             'amount' => $bundle['amount'],
-                            'description' => "{$bundle['name']} @ GHC {$bundle['amount']}",
+                            'description' => $bundle['validity'] == null ?
+                                "{$bundle['name']} @ GHC {$bundle['amount']}" :
+                                "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                             'size' => $bundle['name'],
                             'validity' => $bundle['validity'],
                         ]);
-                    } else {
-                        array_push($list, [
-                            'package_name' => $result['name'], // eg, morning rush
-                            'product_id' => $bundle['product_id'],
-                            'amount' => $bundle['amount'],
-                            'description' => "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
-                            'size' => $bundle['name'],
-                            'validity' => $bundle['validity'],
-                        ]);
-                    }
                 }
             }
             $list = $this->airteltigo_filter($list, $filter);
