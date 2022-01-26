@@ -678,6 +678,7 @@ class XChangeV1 extends API
     {
 //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
+        error_log('logging all bundles');
         error_log(json_encode($result));
         $list = [];
         if (isset($result['success']) && $result['success'] == true) {
@@ -746,9 +747,9 @@ class XChangeV1 extends API
 
     private function airteltigo_filter($bundles, $filter)
     {
-        if ($filter != null && in_array($filter, ['BIGTIME', 'SIKA_KOKOOR', 'XTRA_UNLIMITED_CALLS'])) {
+        if ($filter != null && in_array($filter, ['BigTime Data', 'Sika Kokoo', 'Morning Rush Data', 'XTRA_UNLIMITED_CALLS'])) {
             $result = array_filter($bundles, function ($product) use ($filter) {
-                return $product['category'] == $filter;
+                return $product['package_name'] == $filter;
             });
             return array_values($result);
         }
