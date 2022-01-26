@@ -690,9 +690,7 @@ class XChangeV1 extends API
                             'package_name' => $result['name'], // eg, morning rush
                             'product_id' => $bundle['product_id'],
                             'amount' => $bundle['amount'],
-                            'description' => $result['name'] == 'XTRA_UNLIMITED_CALLS' ?
-                                "{$bundle['name']} @ GHC {$bundle['amount']}" :
-                                "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']}",
+                            'description' => "{$bundle['name']} @ GHC {$bundle['amount']}",
                             'size' => $bundle['name'],
                             'validity' => $bundle['validity'],
                         ]);
@@ -701,9 +699,7 @@ class XChangeV1 extends API
                             'package_name' => $result['name'], // eg, morning rush
                             'product_id' => $bundle['product_id'],
                             'amount' => $bundle['amount'],
-                            'description' => $result['name'] == 'XTRA_UNLIMITED_CALLS' ?
-                                "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}" :
-                                "{$bundle['name']}+{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                            'description' => "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                             'size' => $bundle['name'],
                             'validity' => $bundle['validity'],
                         ]);
