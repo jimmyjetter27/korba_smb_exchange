@@ -713,6 +713,7 @@ class XChangeV1 extends API
         if (isset($result['success']) && $result['success']) {
             foreach ($result['bundles'] as $bundle) {
                 array_push($list, [
+                    'package_name' => 'XTRA_UNLIMITED_CALLS',
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
                     'description' => $bundle['category'] == 'XTRA_UNLIMITED_CALLS' ?
