@@ -253,6 +253,7 @@ class XChangeV1 extends API
             'customer_number' => $customer_number
         ];
         $result = $this->call('get_final_surfline_bundles/', $data);
+        return $result;
         if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
             $list = [];
             if (isset($result['bundles'][$filter])) {
