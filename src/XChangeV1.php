@@ -265,6 +265,7 @@ class XChangeV1 extends API
                     ]);
                 }
             }
+//            $list = $this->airteltigo_filter($list, $filter);
             return [
                 'success' => true,
                 'bundles' => $list
@@ -678,8 +679,6 @@ class XChangeV1 extends API
     {
 //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
-        error_log('logging all bundles');
-        error_log(json_encode($result));
         $list = [];
         if (isset($result['success']) && $result['success'] == true) {
 //            return $result;
