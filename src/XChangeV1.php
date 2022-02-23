@@ -687,8 +687,8 @@ class XChangeV1 extends API
                 foreach ($result['bundles'] as $bundle) {
                         array_push($list, [
                             'package_name' => $result['name'], // eg, morning rush
-                            'product_id' => $bundle['product_id'],
-                            'amount' => $bundle['amount'],
+                            'id' => $bundle['product_id'],
+                            'price' => $bundle['amount'],
                             'description' => $bundle['validity'] == null ?
                                 "{$bundle['name']} @ GHC {$bundle['amount']}" :
                                 "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
@@ -797,7 +797,10 @@ class XChangeV1 extends API
                 'bundles' => $list
             ];
         }
-        return $result;
+        return [
+            'success' => true,
+            'bundles' => $result
+        ];
     }
 
     public function glo_purchase($customer_number, $bundle_id, $amount, $transaction_id, $callback_url, $description = null)
