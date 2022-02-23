@@ -481,7 +481,7 @@ class XChangeV1 extends API
 
                     'name' => $bundle['name'],
                     'id' => $data['product_id'],
-                    'description' => "{$data['name']} @ GHC {$data['price']} - {$data['validity']}",
+                    'description' => "{$data['name']} @ GHC {$data['amount']} - {$data['validity']}",
                     'price' => $data['amount'],
 //                    'volume' => $data['volume'],
 //                    'validity' => $data['validity'],
