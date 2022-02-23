@@ -474,18 +474,21 @@ class XChangeV1 extends API
         if (isset($result['success']) && $result['success']) {
 //            foreach ($result['bundles'][0]['bundles'] as $bundle) {
             foreach ($result['bundles'] as $bundle) {
-                array_push($list, [
-                    $bundle
+                foreach ($bundle['bundles'] as $data) {
 
-//                    'name' => $bundle['name'],
-//                    'id' => $bundle['id'],
-//                    'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
-//                    'price' => $bundle['price'],
-//                    'volume' => $bundle['volume'],
-//                    'validity' => $bundle['validity'],
+                    array_push($list, [
+//                    $bundle
+
+                    'name' => $bundle['name'],
+                    'id' => $data['product_id'],
+                    'description' => "{$data['name']} @ GHC {$data['price']} - {$data['validity']}",
+                    'price' => $data['amount'],
+//                    'volume' => $data['volume'],
+//                    'validity' => $data['validity'],
 
 //                    'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
-                ]);
+                    ]);
+                }
             }
             $list = $this->mtn_filter($list, $filter);
             return [
