@@ -307,7 +307,7 @@ class XChangeV1 extends API
                 ]);
             }
         }
-        return ['success' => true, 'bundles' => $result];
+        return ['success' => true, 'bundles' => $data_bundle];
     }
 
     public function busy_purchase(
