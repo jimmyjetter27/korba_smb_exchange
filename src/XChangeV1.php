@@ -470,17 +470,19 @@ class XChangeV1 extends API
     public function mtn_bundles($filter = null)
     {
         $result = $this->call('get_mtndata_product_id/', []);
-//        Log::debug(json_encode($result));
-//        Log::debug($result);
         $list = [];
         if (isset($result['success']) && $result['success']) {
 //            foreach ($result['bundles'][0]['bundles'] as $bundle) {
             foreach ($result['bundles'] as $bundle) {
                 array_push($list, [
-                    $bundle
-//                    'id' => $bundle['product_id'],
-//                    'price' => $bundle['amount'],
-//                    'description' => $bundle['name'],
+//                    $bundle
+                    'name' => $bundle['name'],
+                    'id' => $bundle['productId'],
+                    'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
+                    'price' => $bundle['price'],
+                    'volume' => $bundle['volume'],
+                    'validity' => $bundle['validity'],
+
 //                    'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
                 ]);
             }
@@ -685,16 +687,16 @@ class XChangeV1 extends API
 //            return $result;
             foreach ($result['results'] as $result) {
                 foreach ($result['bundles'] as $bundle) {
-                        array_push($list, [
-                            'package_name' => $result['name'], // eg, morning rush
-                            'id' => $bundle['product_id'],
-                            'price' => $bundle['amount'],
-                            'description' => $bundle['validity'] == null ?
-                                "{$bundle['name']} @ GHC {$bundle['amount']}" :
-                                "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
-                            'size' => $bundle['name'],
-                            'validity' => $bundle['validity'],
-                        ]);
+                    array_push($list, [
+                        'package_name' => $result['name'], // eg, morning rush
+                        'id' => $bundle['product_id'],
+                        'price' => $bundle['amount'],
+                        'description' => $bundle['validity'] == null ?
+                            "{$bundle['name']} @ GHC {$bundle['amount']}" :
+                            "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                        'size' => $bundle['name'],
+                        'validity' => $bundle['validity'],
+                    ]);
                 }
             }
             $list = $this->airteltigo_filter($list, $filter);
