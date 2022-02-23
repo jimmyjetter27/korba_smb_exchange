@@ -266,13 +266,49 @@ class XChangeV1 extends API
                     ]);
                 }
             }
-//            $list = $this->airteltigo_filter($list, $filter);
             return [
                 'success' => true,
                 'bundles' => $list
             ];
         }
-        return $result;
+
+        $data_bundle = [];
+        foreach ($result['bundles'] as $data) {
+            if (count($data['AllWeather']) != null) {
+                foreach ($data['AllWeather'] as $item) {
+                    array_push($data_bundle, [
+                        'bundle_type' => 'AllWeather',
+                        'id' => $item['bundle_id'],
+                        'description' => "{$item['description']} - GHC {$item['price']} - {$item['validity']}",
+                        'price' => $item['price'],
+                        'validity' => $item['validity']
+                    ]);
+                }
+
+            } elseif (count($data['Unlimited']) != null) {
+                foreach ($data['Unlimited'] as $item) {
+                    array_push($data_bundle, [
+                        'bundle_type' => 'Unlimited',
+                        'id' => $item['bundle_id'],
+                        'description' => "{$item['description']} - GHC {$item['price']} - {$item['validity']}",
+                        'price' => $item['price'],
+                        'validity' => $item['validity']
+                    ]);
+                }
+            } elseif (count($data['AlwaysON']) != null) {
+                foreach ($data['Unlimited'] as $item) {
+                    array_push($data_bundle, [
+                        'bundle_type' => 'Unlimited',
+                        'id' => $item['bundle_id'],
+                        'description' => "{$item['description']} - GHC {$item['price']} - {$item['validity']}",
+                        'price' => $item['price'],
+                        'validity' => $item['validity']
+                    ]);
+                }
+            }
+
+        }
+        return ['success' => true, 'budles' => $data_bundle];
     }
 
     public function busy_purchase(
