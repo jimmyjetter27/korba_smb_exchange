@@ -271,43 +271,7 @@ class XChangeV1 extends API
                 'bundles' => $list
             ];
         }
-
-        $data_bundle = [];
-        if ($result['bundles']['AllWeather'] != null)
-        {
-            foreach ($result['bundles']['AllWeather'] as $data)
-            {
-                array_push($data_bundle, [
-                    'id' => $data['bundle_id'],
-                    'description' => "{$data['description']} - GHC {$data['price']} - {$data['validity']}",
-                    'price' => $data['price'],
-                    'validity' => $data['validity']
-                ]);
-            }
-        } elseif ($result['bundles']['Unlimited'] != null)
-        {
-            foreach ($result['bundles']['Unlimited'] as $data)
-            {
-                array_push($data_bundle, [
-                    'id' => $data['bundle_id'],
-                    'description' => "{$data['description']} - GHC {$data['price']} - {$data['validity']}",
-                    'price' => $data['price'],
-                    'validity' => $data['validity']
-                ]);
-            }
-        } elseif ($result['bundles']['AlwaysON'] != null)
-        {
-            foreach ($result['bundles']['AlwaysON'] as $data)
-            {
-                array_push($data_bundle, [
-                    'id' => $data['bundle_id'],
-                    'description' => "{$data['description']} - GHC {$data['price']} - {$data['validity']}",
-                    'price' => $data['price'],
-                    'validity' => $data['validity']
-                ]);
-            }
-        }
-        return ['success' => true, 'bundles' => $data_bundle];
+        return $result;
     }
 
     public function busy_purchase(
