@@ -500,30 +500,22 @@ class XChangeV1 extends API
 
     private function mtn_filter($bundles, $filter = null)
     {
-        if (in_array($filter, ['daily', 'weekly', 'monthly', 'midnight', 'lifestyle', 'youtube'])) {
-            if ($filter == 'daily') {
+            if (in_array($filter, ['data_bundles', 'kokrokoo', 'social', 'video'])) {
+            if ($filter == 'data_bundles') {
                 $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNDLY*/", $product['id']);
+                    return preg_match("/^MTNDB*/", $product['id']);
                 });
-            } else if ($filter == 'weekly') {
+            } else if ($filter == 'kokrokoo') {
                 $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNWKLY*/", $product['id']);
+                    return preg_match("/^KOKROKOO*/", $product['id']);
                 });
-            } else if ($filter == 'monthly') {
+            } else if ($filter == 'social') {
                 $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNMTH*/", $product['id']);
+                    return preg_match("/^MTNSMB*/", $product['id']);
                 });
-            } else if ($filter == 'midnight') {
+            } else if ($filter == 'video') {
                 $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNMIDNGT3G$/", $product['id']) || preg_match("/^MTNMIDNIGHT$/", $product['id']);
-                });
-            } else if ($filter == 'lifestyle') {
-                $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNLIFESTYLE$/", $product['id']);
-                });
-            } else {
-                $result = array_filter($bundles, function ($product) {
-                    return preg_match("/^MTNYT*/", $product['id']);
+                    return preg_match("/^MTNVB*/", $product['id']);
                 });
             }
             return array_values($result);
