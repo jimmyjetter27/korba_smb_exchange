@@ -799,7 +799,7 @@ class XChangeV1 extends API
             ];
         }
         return [
-            'success' => false,
+            'status' => false,
         ];
     }
 
