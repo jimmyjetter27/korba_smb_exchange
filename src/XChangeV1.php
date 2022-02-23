@@ -475,13 +475,13 @@ class XChangeV1 extends API
 //            foreach ($result['bundles'][0]['bundles'] as $bundle) {
             foreach ($result['bundles'] as $bundle) {
                 array_push($list, [
-//                    $bundle
-                    'name' => $bundle['name'],
-                    'id' => $bundle['id'],
-                    'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
-                    'price' => $bundle['price'],
-                    'volume' => $bundle['volume'],
-                    'validity' => $bundle['validity'],
+                    $bundle
+//                    'name' => $bundle['name'],
+//                    'id' => $bundle['id'],
+//                    'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
+//                    'price' => $bundle['price'],
+//                    'volume' => $bundle['volume'],
+//                    'validity' => $bundle['validity'],
 
 //                    'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
                 ]);
