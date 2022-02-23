@@ -478,7 +478,6 @@ class XChangeV1 extends API
 
                     array_push($list, [
 //                    $bundle
-
                     'name' => $bundle['name'],
                     'id' => $data['product_id'],
                     'description' => "{$data['name']} @ GHC {$data['amount']} - {$data['validity']}",
