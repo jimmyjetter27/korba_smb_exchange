@@ -786,7 +786,8 @@ class XChangeV1 extends API
             foreach ($result['results'] as $bundle) {
                 array_push($list, [
                     'id' => $bundle['productId'],
-                    'description' => $bundle['name'],
+//                    'description' => $bundle['name'],
+                    'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
                     'price' => $bundle['price'],
                     'volume' => $bundle['volume'],
                     'validity' => $bundle['validity'],
@@ -798,8 +799,7 @@ class XChangeV1 extends API
             ];
         }
         return [
-            'success' => true,
-            'bundles' => $result
+            'success' => false,
         ];
     }
 
