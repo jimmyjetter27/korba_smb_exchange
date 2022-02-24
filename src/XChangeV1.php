@@ -672,6 +672,18 @@ class XChangeV1 extends API
         return $this->call('airteltigo_data_topup/', $data);
     }
 
+    public function airteltigo_bundle_types()
+    {
+        $result = $this->call('get_airteltigo_internet_bundles/', []);
+        $types = [];
+        if (isset($result['success']) && $result['success'] == true) {
+            foreach ($result['results'] as $result) {
+                array_push($list, $result['name']);
+            }
+            return $types;
+        }
+    }
+
     public function airteltigo_bundles($filter = null)
     {
 //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
