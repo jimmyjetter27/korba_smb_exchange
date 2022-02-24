@@ -678,7 +678,7 @@ class XChangeV1 extends API
         $types = [];
         if (isset($result['success']) && $result['success'] == true) {
             foreach ($result['results'] as $result) {
-                array_push($list, $result['name']);
+                array_push($types, $result['name']);
             }
             return $types;
         }
