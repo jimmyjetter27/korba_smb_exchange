@@ -254,7 +254,7 @@ class XChangeV1 extends API
         ];
         $result = $this->call('get_final_surfline_bundles/', $data);
 //        return $result;
-        if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
+            if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
             $list = [];
             if (isset($result['bundles'][$filter])) {
                 foreach ($result['bundles'][$filter] as $bundle) {
@@ -600,7 +600,7 @@ class XChangeV1 extends API
                 array_push($list, [
                     'id' => $bundle['bundle_id'],
                     'price' => $bundle['amount'],
-                    'description' => " {$bundle['bundle_size']} - GHC {$bundle['amount']} - {$bundle['validity']}",
+                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                     'size' => $bundle['bundle_size'],
                     'category' => $bundle['category'],
                     'validity' => $bundle['validity'],
