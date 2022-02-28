@@ -602,7 +602,7 @@ class XChangeV1 extends API
                     'id' => $bundle['bundle_id'],
                     'price' => $bundle['amount'],
 //                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
-                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - ".preg_match('/NO EXPIRY/i', '', $bundle['validity']),
+                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - ".str_replace('NO EXPIRY', '', $bundle['validity']),
                     'size' => $bundle['bundle_size'],
                     'category' => $bundle['category'],
                     'validity' => $bundle['validity'],
