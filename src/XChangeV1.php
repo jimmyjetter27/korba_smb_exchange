@@ -603,8 +603,8 @@ class XChangeV1 extends API
                     'price' => $bundle['amount'],
 //                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                     'description' => $bundle['validity'] == 'NO EXPIRY' ?
-                        " {$bundle['bundle_size']} @ GHC {$bundle['amount']} " :
-                        " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                        "{$bundle['name']} @ GHC {$bundle['amount']}" :
+                        "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                     'size' => $bundle['bundle_size'],
                     'category' => $bundle['category'],
                     'validity' => $bundle['validity'],
