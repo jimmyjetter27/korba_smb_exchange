@@ -541,7 +541,8 @@ class XChangeV1 extends API
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
-                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
+//                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
+                    'description' => "{$bundle['name']} - GHC {$bundle['amount']}"
                 ]);
             }
             return [
