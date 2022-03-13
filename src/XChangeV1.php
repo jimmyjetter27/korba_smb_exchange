@@ -541,7 +541,8 @@ class XChangeV1 extends API
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
-                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
+//                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
+                    'description' => "{$bundle['name']} - GHC {$bundle['amount']}"
                 ]);
             }
             return [
@@ -600,7 +601,10 @@ class XChangeV1 extends API
                 array_push($list, [
                     'id' => $bundle['bundle_id'],
                     'price' => $bundle['amount'],
-                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+//                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                    'description' => $bundle['validity'] == 'No Expiry' ?
+                        "{$bundle['bundle_size']} @ GHC {$bundle['amount']}" :
+                        "{$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                     'size' => $bundle['bundle_size'],
                     'category' => $bundle['category'],
                     'validity' => $bundle['validity'],
