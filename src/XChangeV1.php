@@ -103,6 +103,11 @@ class XChangeV1 extends API
         return $this->call('collect/', $data);
     }
 
+
+    public function ovaBalance() {
+        return $this->call('get_ova_balance/', null);
+    }
+
     public function disburse(
         $customer_number, $amount, $transaction_id, $network_code, $callback_url,
         $description = null, $extra_info = null, $bank_account_number = null,
