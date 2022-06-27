@@ -99,7 +99,7 @@ class XChangeV1 extends API
             'redirect_url' => $redirect_url
 //            'is_ussd' => $is_ussd
         ];
-
+        Log::info('collection_payload: '.json_encode(array_merge($data, $opt_data)));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
