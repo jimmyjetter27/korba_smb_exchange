@@ -68,7 +68,6 @@ class XChangeV1 extends API
     {
         $data = array_merge($data, ['client_id' => $this->client_id]);
         $extra_headers = ($extra_headers) ? array_merge($extra_headers, $this->getHMACHeader($data)) : $this->getHMACHeader($data);
-        return $data;
         return parent::call($endpoint, $data, $extra_headers, $timeout, $connection_timeout);
     }
 
