@@ -877,6 +877,26 @@ class XChangeV1 extends API
 //        Log::debug(json_encode($result));
     }
 
+    public function prepaid_lookup($meter_code)
+    {
+        return $this->call('ecg_meter_lookup/', ['meter_code' => $meter_code]);
+    }
+
+    public function ecg_prepaid_pay($meter_code, $transaction_id, $amount, $meter_owner, $callback_url, $description = null)
+    {
+        $data = [
+            'meter_code' => $meter_code,
+            'meter_owner' => $meter_owner,
+            'amount' => $amount,
+            'transaction_id' => $transaction_id,
+            'callback_url' => $callback_url
+        ];
+
+        $opt_data = ['description' => $description];
+        $this->add_optional_data($data, $opt_data);
+        return $this->call('ecg_prepaid_initiate_request/', $data);
+    }
+
     public function etransact_pay(
         $customer_number, $bill_type, $transaction_id, $sender_name, $address, $amount, $callback_url,
         $description = null, $payer_name = null, $extra_info = null)
