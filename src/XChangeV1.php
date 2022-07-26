@@ -897,6 +897,112 @@ class XChangeV1 extends API
         return $this->call('ecg_prepaid_initiate_request/', $data);
     }
 
+
+    public function petra_customer_lookup($petra_id)
+    {
+        $data = ['petra_id' => $petra_id];
+        return $this->call('petra_customer_lookup/', $data);
+    }
+
+    public function petra_pay($customer_number, $amount, $transaction_id, $network_code, $callback_url, $payer_name, $description = null, $extra_info = null)
+    {
+        $data = [
+            'customer_number' => $customer_number,
+            'amount' => $amount,
+            'external_transaction_id' => $transaction_id,
+            'network_code' => $network_code,
+            'callback_url' => $callback_url,
+
+
+        ];
+
+        $opt_data = [
+            'description' => $description,
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info,
+        ];
+        $this->add_optional_data($data, $opt_data);
+        return $this->call('petra/pay_premium/', $data);
+    }
+
+
+    public function validate_prudential_user($phone_number)
+    {
+        $data = ['phone_number' => $phone_number];
+        return $this->call('prudential/validate_user/', $data);
+    }
+
+    public function prudential_service_form_request($phone_number)
+    {
+        $data = ['phone_number' => $phone_number];
+        return $this->call('prudential/service_form_request/', $data);
+    }
+
+    public function prudential_policy_benefits($policy_number)
+    {
+        $data = ['policy_number' => $policy_number];
+        return $this->call('prudential/policy_benefits/', $data);
+    }
+
+    public function prudential_validate_pin($phone_number, $pin)
+    {
+        $data = ['phone_number' => $phone_number, 'pin' => $pin];
+        return $this->call('prudential/validate_pin/', $data);
+    }
+
+    public function prudential_reset_pin($phone_number, $pin)
+    {
+        $data = ['phone_number' => $phone_number, 'pin' => $pin];
+        return $this->call('prudential/reset_pin/', $data);
+    }
+
+    public function prudential_policy_statement($phone_number, $policy_number)
+    {
+        $data = ['phone_number' => $phone_number, 'policy_number' => $policy_number];
+        return $this->call('prudential/policy_statement/', $data);
+    }
+
+    public function prudential_change_pin($phone_number, $pin, $new_pin)
+    {
+        $data = ['phone_number' => $phone_number, 'pin' => $pin, 'new_pin' => $new_pin];
+        return $this->call('prudential/change_pin/', $data);
+    }
+
+    public function prudential_update_email($phone_number, $email)
+    {
+        $data = ['phone_number' => $phone_number, 'email' => $email];
+        return $this->call('prudential/update_email/', $data);
+    }
+
+    public function prudential_user_policy_list($phone_number, $unique_user_id)
+    {
+        $data = ['phone_number' => $phone_number, 'unique_user_id' => $unique_user_id];
+        return $this->call('prudential/user_policy_list/', $data);
+    }
+
+    public function prudential_user_policy_detail($policy_number)
+    {
+        $data = ['policy_number' => $policy_number];
+        return $this->call('prudential/user_policy_detail/', $data);
+    }
+
+
+    public function prudential_pay_premium($customer_number, $amount, $voucher_code, $transaction_id, $network_code, $callback_url, $description = null, $payer_name = null, $extra_info = null)
+    {
+        $data = [
+            'customer_number' => $customer_number,
+            'amount' => $amount,
+            'voucher_code' => $voucher_code,
+            'external_transaction_id' => $transaction_id,
+            'network_code' => $network_code,
+            'callback_url' => $callback_url,
+            'description' => $description,
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info
+        ];
+        return $this->call('prudential/pay_premium/', $data);
+    }
+
     public function etransact_pay(
         $customer_number, $bill_type, $transaction_id, $sender_name, $address, $amount, $callback_url,
         $description = null, $payer_name = null, $extra_info = null)
