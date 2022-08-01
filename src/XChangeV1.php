@@ -987,19 +987,24 @@ class XChangeV1 extends API
     }
 
 
-    public function prudential_pay_premium($customer_number, $amount, $voucher_code, $transaction_id, $network_code, $callback_url, $description = null, $payer_name = null, $extra_info = null)
+    public function prudential_pay_premium($customer_number, $amount, $client_number, $transaction_id, $network_code, $callback_url, $description, $client_name, $voucher_code = null, $payer_name = null, $extra_info = null)
     {
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
-            'voucher_code' => $voucher_code,
             'external_transaction_id' => $transaction_id,
             'network_code' => $network_code,
             'callback_url' => $callback_url,
+            'client_number' => $client_number,
+            'client_name' => $client_name,
             'description' => $description,
-            'payer_name' => $payer_name,
-            'extra_info' => $extra_info
         ];
+        $opt_data = [
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info,
+            'voucher_code' => $voucher_code,
+        ];
+        $this->add_optional_data($data, $opt_data);
         return $this->call('prudential/pay_premium/', $data);
     }
 
