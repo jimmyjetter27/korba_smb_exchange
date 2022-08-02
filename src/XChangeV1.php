@@ -992,7 +992,8 @@ class XChangeV1 extends API
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
-            'external_transaction_id' => $transaction_id,
+//            'external_transaction_id' => $transaction_id,
+            'transaction_id' => $transaction_id,
             'network_code' => $network_code,
             'callback_url' => $callback_url,
             'client_number' => $client_number,
