@@ -1001,7 +1001,6 @@ class XChangeV1 extends API
             'client_number' => $client_number,
             'client_name' => $client_name,
             'description' => $description,
-            ''
         ];
         Log::info('prudential_pay_premium_data: ' . json_encode($data));
         $opt_data = [
