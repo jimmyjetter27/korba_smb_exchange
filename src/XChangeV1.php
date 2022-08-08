@@ -988,13 +988,14 @@ class XChangeV1 extends API
     }
 
 
-    public function prudential_pay_premium($customer_number, $amount, $client_number, $policy_number, $transaction_id, $network_code, $callback_url, $description, $client_name, $voucher_code = null, $payer_name = null, $extra_info = null)
+    public function prudential_pay_premium($customer_number, $amount, $client_number, $policy_number, $policy_phone_number, $transaction_id, $network_code, $callback_url, $description, $client_name, $voucher_code = null, $payer_name = null, $extra_info = null)
     {
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
 //            'external_transaction_id' => $transaction_id,
-//            'policy_number' => $policy_number,
+            'policy_phone_number' => $policy_phone_number,
+            'policy_number' => $policy_number,
             'transaction_id' => $transaction_id,
             'network_code' => $network_code,
             'callback_url' => $callback_url,
