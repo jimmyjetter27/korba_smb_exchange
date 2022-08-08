@@ -99,13 +99,14 @@ class XChangeV1 extends API
             'redirect_url' => $redirect_url
 //            'is_ussd' => $is_ussd
         ];
-        Log::info('collection_payload: '.json_encode(array_merge($data, $opt_data)));
+        Log::info('collection_payload: ' . json_encode(array_merge($data, $opt_data)));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
     }
 
 
-    public function ovaBalance() {
+    public function ovaBalance()
+    {
         return $this->call('get_ova_balance/', []);
     }
 
@@ -261,7 +262,7 @@ class XChangeV1 extends API
         ];
         $result = $this->call('get_final_surfline_bundles/', $data);
 //        return $result;
-            if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
+        if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
             $list = [];
             if (isset($result['bundles'][$filter])) {
                 foreach ($result['bundles'][$filter] as $bundle) {
@@ -507,7 +508,7 @@ class XChangeV1 extends API
 
     private function mtn_filter($bundles, $filter = null)
     {
-            if (in_array($filter, ['data_bundles', 'kokrokoo', 'social', 'video'])) {
+        if (in_array($filter, ['data_bundles', 'kokrokoo', 'social', 'video'])) {
             if ($filter == 'data_bundles') {
                 $result = array_filter($bundles, function ($product) {
                     return preg_match("/^MTNDB*/", $product['id']);
@@ -987,18 +988,20 @@ class XChangeV1 extends API
     }
 
 
-    public function prudential_pay_premium($customer_number, $amount, $client_number, $transaction_id, $network_code, $callback_url, $description, $client_name, $voucher_code = null, $payer_name = null, $extra_info = null)
+    public function prudential_pay_premium($customer_number, $amount, $client_number, $policy_number, $transaction_id, $network_code, $callback_url, $description, $client_name, $voucher_code = null, $payer_name = null, $extra_info = null)
     {
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
 //            'external_transaction_id' => $transaction_id,
+            'policy_number' => $policy_number,
             'transaction_id' => $transaction_id,
             'network_code' => $network_code,
             'callback_url' => $callback_url,
             'client_number' => $client_number,
             'client_name' => $client_name,
             'description' => $description,
+            ''
         ];
         Log::info('prudential_pay_premium_data: ' . json_encode($data));
         $opt_data = [
