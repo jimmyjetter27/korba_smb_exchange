@@ -49,7 +49,7 @@ class XChangeV1 extends API
         $this->client_id = $client_id;
     }
 
-    private function getHMACHeader($data)
+    public function getHMACHeader($data)
     {
         $data = (gettype($data) == 'string') ? json_decode($data, true) : $data;
         $data = array_merge($data, ['client_id' => $this->client_id]);
