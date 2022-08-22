@@ -402,8 +402,6 @@ final class Util
                 $response['network'] = 'VOD';
             } else if ($response['network'] == 'AirtelTigo') {
                 $response['network'] = 'AIR';
-            }  else {
-                $response['network'] = 'UNKNOWN';
             }
 
             return $response;
