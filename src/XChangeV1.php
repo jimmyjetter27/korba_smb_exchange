@@ -80,6 +80,11 @@ class XChangeV1 extends API
         }
     }
 
+    public function networkLookup($phoneNumber)
+    {
+        return Util::checkNetworkName(parent::networkLookup($phoneNumber));
+    }
+
     public function collect(
         $customer_number, $amount, $transaction_id, $network_code, $callback_url,
         $vodafone_voucher_code = null, $description = null, $payer_name = null, $extra_info = null, $redirect_url = null)

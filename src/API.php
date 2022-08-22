@@ -9,6 +9,8 @@
  */
 //namespace JimmyJetter\SmbExchange;
 namespace Korba;
+use Illuminate\Support\Facades\Http;
+
 /**
  * Class API helps access API quickly.
  * A class to help quickly make request to api endpoints.
@@ -95,4 +97,19 @@ class API
         $result = json_decode($res, true);
         return $result;
     }
+
+    protected function networkLookup($phoneNumber)
+    {
+        if (empty(env('EPESEWA_BASE_URL'))) {
+            return ['success' => false, 'message' => 'EPESEWA BASE URL is not set'];
+        }
+
+        $endpoint = env('EPESEWA_BASE_URL') . '/korba/networklookup/'.$phoneNumber;
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json'
+        ])
+            ->post($endpoint);
+        return json_decode($response, true);
+    }
+
 }
