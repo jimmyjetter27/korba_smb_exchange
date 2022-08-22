@@ -10,6 +10,8 @@
 //namespace JimmyJetter\SmbExchange;
 namespace Korba;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use KorbaXchange\KorbaHelper;
 
 /**
  * Class API helps access API quickly.
@@ -110,6 +112,47 @@ class API
         ])
             ->post($endpoint);
         return json_decode($response, true);
+    }
+
+
+    protected function phoneNumberNameLookup($phoneNumber)
+    {
+        if (empty(env('NAME_LOOKUP_URL'))) {
+            return ['success' => false, 'message' => 'NAME LOOKUP URL is not set'];
+        }
+
+        $get_network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber));
+        $network = $get_network['network'];
+
+        $body = [];
+        if ($network == "MTN") {
+            $body = [
+                'destBank' => env('MTN_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            ];
+        } elseif ($network == "VOD") {
+            $body = [
+                'destBank' => env('VODA_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            ];
+        } elseif ($network == "AIR") {
+            $body = [
+                'destBank' => env('AIR_ROUTE_CODE'),
+                'accountToCredit' => $phoneNumber
+            ];
+        }
+
+        try {
+            $response = Http::withOptions([
+                'debug' => fopen('php://stderr', 'w'),
+                'verify' => false
+            ])
+                ->post(env('NAME_LOOKUP_URL'), $body);
+            return json_decode($response, 2);
+        } catch (\Exception $exception) {
+            Log::debug('logging exception: '.json_encode($exception->getMessage()));
+            return $exception->getMessage();
+        }
     }
 
 }
