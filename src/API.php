@@ -11,7 +11,6 @@
 namespace Korba;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use KorbaXchange\KorbaHelper;
 
 /**
  * Class API helps access API quickly.
@@ -121,7 +120,7 @@ class API
             return ['success' => false, 'message' => 'NAME LOOKUP URL is not set'];
         }
 
-        $get_network = KorbaHelper::checkNetworkName($this->networkLookup($phoneNumber));
+        $get_network = Util::checkNetworkName($this->networkLookup($phoneNumber));
         $network = $get_network['network'];
 
         $body = [];
