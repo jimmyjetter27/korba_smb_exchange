@@ -1156,4 +1156,9 @@ class XChangeV1 extends API
         ];
         return $this->call('mtn_recurring_check_mandate_status/', $data);
     }
+
+    public function authorized_bank_list()
+    {
+        return $this->call('authorized_bank_list/', []);
+    }
 }
