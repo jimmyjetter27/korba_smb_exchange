@@ -122,8 +122,8 @@ class XChangeV1 extends API
 
     public function disburse(
         $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $description = null, $extra_info = null, $bank_account_number = null,
-        $bank_name = null, $bank_branch_name = null, $payer_name = null, $payer_mobile = null)
+        $description = null, $extra_info = null, $bank_account_number = null, $bank_account_name,
+        $bank_name = null, $bank_branch_name = null, $payer_name = null, $payer_mobile = null, $bank_code = null)
     {
         $data = [
             'customer_number' => $customer_number,
@@ -135,11 +135,13 @@ class XChangeV1 extends API
         $opt_data = [
             'description' => $description,
             'extra_info' => $extra_info,
-            'bank_account_number' => $bank_account_number,
-            'bank_name' => $bank_name,
-            'bank_branch_name' => $bank_branch_name,
             'payer_name' => $payer_name,
-            'payer_mobile' => $payer_mobile
+            'payer_mobile' => $payer_mobile,
+            'bank_code' => $bank_code,
+            'recipient_bank_name' => $bank_name,
+            'bank_account_number' => $bank_account_number,
+            'bank_account_name' => $bank_account_name,
+            'bank_branch_name' => $bank_branch_name,
         ];
         $this->add_optional_data($data, $opt_data);
         return $this->call('disburse/', $data);
