@@ -122,7 +122,7 @@ class XChangeV1 extends API
 
     public function disburse(
         $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $description = null, $extra_info = null, $bank_account_number = null, $bank_account_name,
+        $description = null, $extra_info = null, $bank_account_number = null, $bank_account_name = null,
         $bank_name = null, $bank_branch_name = null, $payer_name = null, $payer_mobile = null, $bank_code = null)
     {
         $data = [
