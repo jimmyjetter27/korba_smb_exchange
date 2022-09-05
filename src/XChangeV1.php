@@ -143,6 +143,7 @@ class XChangeV1 extends API
             'bank_account_name' => $bank_account_name,
             'bank_branch_name' => $bank_branch_name,
         ];
+        Log::info('disbursement_payload: ' . json_encode(array_merge($data, $opt_data)));
         $this->add_optional_data($data, $opt_data);
         return $this->call('disburse/', $data);
     }
