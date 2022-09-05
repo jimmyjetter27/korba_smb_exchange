@@ -1167,7 +1167,8 @@ class XChangeV1 extends API
 
     public function authorized_customer_lookup($bank_account_number, $bank_code)
     {
-        $data = ['bank_code' => $bank_code, 'bank_account_number' => $bank_account_number];
+//        $data = ['bank_code' => $bank_code, 'bank_account_number' => $bank_account_number];
+        $data = ['bank_code' => $bank_code, 'customer_number' => $bank_account_number];
         return $this->call('authorized_customer_lookup/', $data);
     }
 }
