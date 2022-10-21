@@ -620,7 +620,7 @@ class XChangeV1 extends API
         if (isset($result['success']) && $result['success']) {
             $list = [];
             foreach ($result['bundles'] as $bundle) {
-                array_push($list, [
+                $list[] = [
                     'id' => $bundle['bundle_id'],
                     'price' => $bundle['amount'],
 //                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
@@ -631,10 +631,10 @@ class XChangeV1 extends API
                     'category' => $bundle['category'],
                     'validity' => $bundle['validity'],
                     'name' => $bundle['name']
-                ]);
+                ];
             }
 
-            if ($filter != null && in_array($filter, ['DAILY', 'WEEKLY', 'MONTHLY', 'NO EXPIRY', 'JUMBO'])) {
+            if ($filter != null && in_array($filter, ['DAILY', 'WEEKLY', 'MONTHLY', 'NO EXPIRY', 'NIGHT', 'HOURLY'])) {
                 $list = array_filter($list, function ($value) use ($filter) {
                     return $value['category'] == $filter;
                 });
@@ -649,6 +649,11 @@ class XChangeV1 extends API
         }
 
         return $result;
+    }
+
+    public function vodafone_bundle_types()
+    {
+        $response = self::new_vodafone_bundles();
     }
 
     public function vodafone_purchase($customer_number, $transaction_id, $amount, $callback_url,
