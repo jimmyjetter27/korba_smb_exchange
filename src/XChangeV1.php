@@ -125,24 +125,43 @@ class XChangeV1 extends API
         $description = null, $extra_info = null, $bank_account_number = null, $bank_account_name = null,
         $bank_name = null, $bank_branch_name = null, $payer_name = null, $payer_mobile = null, $bank_code = null)
     {
-        $data = [
-            'customer_number' => $customer_number,
-            'amount' => $amount,
-            'transaction_id' => $transaction_id,
-            'network_code' => $network_code,
-            'callback_url' => $callback_url
-        ];
-        $opt_data = [
-            'description' => $description,
-            'extra_info' => $extra_info,
-            'payer_name' => $payer_name,
-            'payer_mobile' => $payer_mobile,
-            'bank_code' => $bank_code,
-            'recipient_bank_name' => $bank_name,
-            'bank_account_number' => $bank_account_number,
-            'bank_account_name' => $bank_account_name,
-            'bank_branch_name' => $bank_branch_name,
-        ];
+
+        if ($network_code == 'ISP') // bank disbursement
+        {
+            $data = [
+//                'customer_number' => $customer_number,
+                'amount' => $amount,
+                'transaction_id' => $transaction_id,
+                'network_code' => $network_code,
+                'callback_url' => $callback_url
+            ];
+            $opt_data = [
+                'description' => $description,
+                'extra_info' => $extra_info,
+                'payer_name' => $payer_name,
+                'payer_mobile' => $payer_mobile,
+                'bank_code' => $bank_code,
+                'recipient_bank_name' => $bank_name,
+                'bank_account_number' => $bank_account_number,
+                'bank_account_name' => $bank_account_name,
+//                'bank_branch_name' => $bank_branch_name,
+            ];
+        } else { // Mobile money disbursement
+            $data = [
+                'customer_number' => $customer_number,
+                'amount' => $amount,
+                'transaction_id' => $transaction_id,
+                'network_code' => $network_code,
+                'callback_url' => $callback_url
+            ];
+            $opt_data = [
+                'description' => $description,
+                'extra_info' => $extra_info,
+                'payer_name' => $payer_name,
+                'payer_mobile' => $payer_mobile,
+            ];
+        }
+
         Log::info('disbursement_payload: ' . json_encode(array_merge($data, $opt_data)));
         $this->add_optional_data($data, $opt_data);
         return $this->call('disburse/', $data);
