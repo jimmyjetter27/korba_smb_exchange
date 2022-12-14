@@ -106,7 +106,8 @@ class API
         }
 
         $endpoint = env('EPESEWA_BASE_URL') . '/korba/networklookup/'.$phoneNumber;
-        $response = Http::withHeaders([
+        $response = Http::withoutVerifying()
+        ->withHeaders([
             'Content-Type' => 'application/json'
         ])
             ->post($endpoint);
