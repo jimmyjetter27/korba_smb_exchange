@@ -114,6 +114,17 @@ class API
         return json_decode($response, true);
     }
 
+    public function nameNetworkLookup($phone_number)
+    {
+        $endpoint = "https://fxdtjd96u7.execute-api.eu-west-1.amazonaws.com/dev/".$phone_number;
+        $response = Http::withoutVerifying()
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ])
+            ->get($endpoint);
+        return json_decode($response, true);
+    }
+
 
     protected function phoneNumberNameLookup($phoneNumber)
     {
