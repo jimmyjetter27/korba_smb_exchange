@@ -87,7 +87,7 @@ class XChangeV1 extends API
 
     public function nameNetworkLookup($phoneNumber)
     {
-        return Util::checkNetworkName(parent::nameNetworkLookup($phoneNumber));
+        return parent::nameNetworkLookup($phoneNumber);
     }
 
     public function phoneNumberNameLookup($phoneNumber)

@@ -122,7 +122,16 @@ class API
                 'Content-Type' => 'application/json'
             ])
             ->get($endpoint);
-        return json_decode($response, true);
+
+        if (isset($response['success']) && $response['success'] == true) {
+            if ($response['network'] == 'Vodafone') {
+                $response['network'] = 'VOD';
+            } else if ($response['network'] == 'AirtelTigo') {
+                $response['network'] = 'AIR';
+            }
+            return json_decode($response, 2);
+        }
+        return json_decode($response, 2);
     }
 
 
