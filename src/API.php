@@ -105,7 +105,7 @@ class API
             return ['success' => false, 'message' => 'EPESEWA BASE URL is not set'];
         }
 
-        $endpoint = env('EPESEWA_BASE_URL') . '/korba/networklookup/'.$phoneNumber;
+        $endpoint = env('EPESEWA_BASE_URL') . '/mno/gh/lookup/'.$phoneNumber;
         $response = Http::withoutVerifying()
         ->withHeaders([
             'Content-Type' => 'application/json'
