@@ -123,15 +123,18 @@ class API
             ])
             ->get($endpoint);
 
-        if (isset($response['success']) && $response['success'] == true) {
-            if ($response['network'] == 'Vodafone') {
-                $response['network'] = 'VOD';
-            } else if ($response['network'] == 'AirtelTigo') {
-                $response['network'] = 'AIR';
+        $data = json_decode($response, true);
+        if (isset($data['success']) && $data['success'] == true) {
+            if ($data['network'] == 'Vodafone') {
+                $data['network'] = 'VOD';
+            } else if ($data['network'] == 'AirtelTigo') {
+                $data['network'] = 'AIR';
             }
-            return json_decode($response, 2);
+//            return json_decode($response, 2);
+            return $data;
         }
-        return json_decode($response, 2);
+//        return json_decode($response, 2);
+        return $data;
     }
 
 
