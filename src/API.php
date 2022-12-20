@@ -39,6 +39,7 @@ class API
      */
     public function __construct($base_url, $headers, $proxy = null)
     {
+        dd($proxy);
         $this->base_url = $base_url;
         $this->headers = $headers;
         if ($proxy) {
