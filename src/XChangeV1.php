@@ -31,6 +31,15 @@ class XChangeV1 extends API
 
     public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $proxy = null, $xchange_url = null,)
     {
+        dd([
+            'secret_key' => $secret_key,
+            'client_key' => $client_key,
+            'client_id' => $client_id,
+            'mode' => $mode,
+            'proxy' => $proxy,
+            'xchange_url' => $xchange_url
+
+        ]);
         $headers = array(
             'Cache-Control: no-cache',
             'Content-Type: application/json'
