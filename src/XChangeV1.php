@@ -28,19 +28,17 @@ class XChangeV1 extends API
 //    protected static $live_url = 'https://xchange.korbaweb.com/api/v1.0';
     protected static $aws_url = 'http://internal-awseb-e-e-awsebloa-kxexw3t2bgt7-1521297916.eu-west-1.elb.amazonaws.com/api/v1.0';
 
-    public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $proxy = null)
+    public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $xchange_url = null, $proxy = null)
     {
         $headers = array(
             'Cache-Control: no-cache',
             'Content-Type: application/json'
         );
-        if ($mode == 'aws') {
-            $url = XChangeV1::$aws_url;
-        } else if ($mode == 'test') {
-//            $url = XChangeV1::$test_url;
+        if (!empty($xchange_url)) {
+            $url = $xchange_url;
+        } elseif ($mode == 'test') {
             $url = env('TEST_URL');
         } else {
-//            $url = XChangeV1::$live_url;
             $url = env('LIVE_URL');
         }
         parent::__construct($url, $headers, $proxy);
