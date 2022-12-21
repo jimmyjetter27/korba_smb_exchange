@@ -30,12 +30,12 @@ class XChangeV1 extends API
 
     public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $proxy = null)
     {
-        dd([
+        Log::info('exchange_creds'. json_encode([
             'secret' => $secret_key,
             'client_key' => $client_key,
             'client_id' => $client_id,
             'mode' => $mode
-        ]);
+        ]));
         $headers = array(
             'Cache-Control: no-cache',
             'Content-Type: application/json'
