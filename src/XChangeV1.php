@@ -30,12 +30,6 @@ class XChangeV1 extends API
 
     public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $proxy = null)
     {
-        Log::info('exchange_creds'. json_encode([
-            'secret' => $secret_key,
-            'client_key' => $client_key,
-            'client_id' => $client_id,
-            'mode' => $mode
-        ]));
         $headers = array(
             'Cache-Control: no-cache',
             'Content-Type: application/json'
@@ -43,7 +37,7 @@ class XChangeV1 extends API
         if ($mode == 'test') {
             $url = env('TEST_URL');
         } elseif ($mode == '365Xchange') {
-            $url = "https://xchange.korba365.com";
+            $url = "https://xchange.korba365.com/api/v1.0";
         } else {
             $url = env('LIVE_URL');
         }
