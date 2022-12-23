@@ -739,7 +739,7 @@ class XChangeV1 extends API
         return $this->call('vodafone_bill_payment/get_outstanding/', $data);
     }
 
-    public function vodafone_bill_payment($account_number, $amount, $callback_url, $payment_mode, $transaction_id, $description = null)
+    public function vodafone_bill_payment($account_number, $amount, $callback_url, $payment_mode, $transaction_id, $description = "")
     {
         $data = [
             'account_number' => $account_number,
