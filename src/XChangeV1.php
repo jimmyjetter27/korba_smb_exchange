@@ -749,6 +749,7 @@ class XChangeV1 extends API
             'payment_mode' => $payment_mode,
             'description' => $description
         ];
+        Log::info('VODAFONE_BILL_PAYMENT_PAYLOAD: '.json_encode($data));
         return $this->call('vodafone_bill_payment/get_outstanding/', $data);
     }
 
