@@ -715,6 +715,44 @@ class XChangeV1 extends API
         return $this->call('new_vodafone_data_topup/', $data);
     }
 
+    public function vodafone_bill_payment_customer_info($account_number)
+    {
+        $data = ['account_number' => $account_number];
+        return $this->call('vodafone_bill_payment/get_customer_info/', $data);
+    }
+
+    public function vodafone_bill_payment_check_balance($account_number)
+    {
+        $data = ['account_number' => $account_number];
+        return $this->call('vodafone_bill_payment/check_balance/', $data);
+    }
+
+    public function vodafone_bill_payment_get_unbilled($account_number)
+    {
+        $data = ['account_number' => $account_number];
+        return $this->call('vodafone_bill_payment/get_unbilled/', $data);
+    }
+
+    public function vodafone_bill_payment_outstanding($account_number)
+    {
+        $data = ['account_number' => $account_number];
+        return $this->call('vodafone_bill_payment/get_outstanding/', $data);
+    }
+
+    public function vodafone_bill_payment($account_number, $amount, $callback_url, $payment_mode, $transaction_id, $description)
+    {
+        $data = [
+            'account_number' => $account_number,
+            'amount' => $amount,
+            'transaction_id' => $transaction_id,
+            'callback_url' => $callback_url,
+            'payment_mode' => $payment_mode,
+            'description' => $description
+        ];
+        return $this->call('vodafone_bill_payment/get_outstanding/', $data);
+    }
+
+
     public function airteltigo_purchase(
         $customer_number, $transaction_id, $product_id, $amount, $callback_url,
         $description = null, $payer_name = null, $extra_info = null)
