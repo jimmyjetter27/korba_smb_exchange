@@ -133,7 +133,7 @@ class XChangeV1 extends API
         if ($network_code == 'ISP') // bank disbursement
         {
             $data = [
-                'customer_number' => $customer_number,
+//                'customer_number' => $customer_number,
                 'amount' => $amount,
                 'transaction_id' => $transaction_id,
                 'network_code' => $network_code,
