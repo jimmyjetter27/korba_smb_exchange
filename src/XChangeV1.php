@@ -124,13 +124,19 @@ class XChangeV1 extends API
         return $this->call('get_ova_balance/', []);
     }
 
-    public function ovaTransfer($recipient, $amount)
+    public function ovaTransfer($recipient, $amount, $payer_name = null, $extra_info = null)
     {
         $data = [
             'recipient' => $recipient,
             'amount' => $amount,
         ];
-        Log::info('ova_transfer_payload: ' . json_encode($data));
+
+        $opt_data = [
+            'payer_name' => $payer_name,
+            'extra_info' => $extra_info,
+        ];
+        Log::info('ova_transfer_payload: ' . json_encode(array_merge($data, $opt_data)));
+        $this->add_optional_data($data, $opt_data);
         return $this->call('ova_transfer/', $data);
     }
 
