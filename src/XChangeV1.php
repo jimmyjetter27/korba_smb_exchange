@@ -124,7 +124,7 @@ class XChangeV1 extends API
         return $this->call('get_ova_balance/', []);
     }
 
-    public function ovaTransfer($recipient, $amount, $payer_name = null, $extra_info = null)
+    public function ovaTransfer($recipient, $amount, $payer_name = null, $extra_info = null, $transaction_id = null)
     {
         $data = [
             'recipient' => $recipient,
@@ -132,6 +132,7 @@ class XChangeV1 extends API
         ];
 
         $opt_data = [
+            'transaction_id' => $transaction_id,
             'payer_name' => $payer_name,
             'extra_info' => $extra_info,
         ];
