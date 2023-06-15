@@ -1259,7 +1259,7 @@ class XChangeV1 extends API
 
     // Brassica endpoints
 
-    public function brassica_vending_meter_info($meter_number, $account_number)
+    public function brassica_vending_meter_info($meter_number, $account_number = null)
     {
         $data = ['meter_number' => $meter_number, 'account_number' => $account_number];
         return $this->call('ecg_vending_get_meter_info/', $data);
