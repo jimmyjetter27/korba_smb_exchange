@@ -1275,8 +1275,8 @@ class XChangeV1 extends API
             'region_id' => $region_id,
             'district_id' => $district_id,
             'card_buffer' => $card_buffer,
-            'meter_model' => $meter_model,
-            'card_id' => $card_id
+            'meter_model' => $meter_model ?? '',
+            'card_id' => $card_id ?? ''
         ];
         return $this->call('ecg_vending_prepaid_inquiry/', $data);
     }
