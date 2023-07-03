@@ -1296,8 +1296,8 @@ class XChangeV1 extends API
             'meter_model' => $meter_model,
             'card_id' => $card_id,
             'amount' => $amount,
-            'consumer_version' => $consumer_version,
-            'approval_code' => $approval_code,
+            'consumer_version' => $consumer_version ?? '',
+            'approval_code' => $approval_code ?? '',
             'external_transaction_id' => $external_transaction_id,
             'description' => $description
         ];
@@ -1326,5 +1326,30 @@ class XChangeV1 extends API
             'description' => $description
         ];
         return $this->call('ecg_vending_prepaid_repair/', $data);
+    }
+
+
+    // Hubtel ECG Endpoints
+    public function ecg_prepaid_postpaid_account_inquiry($power_app_number)
+    {
+        $data = ['power_app_number' => $power_app_number];
+        return $this->call('ecg_prepaid_postpaid_account_inquiry/', $data);
+    }
+
+    public function ecg_prepaid_postpaid_topup_account($meter_number, $destination, $transaction_id, $amount, $callback_url, $description = null)
+    {
+        $data = [
+            'bundle' => $meter_number,
+            'destination' => $destination,
+            'transaction_id' => $transaction_id,
+            'amount' => $amount,
+            'callback_url' => $callback_url
+        ];
+
+        $opt_data = [
+            'description' => $description
+        ];
+        $this->add_optional_data($data, $opt_data);
+        return $this->call('ecg_prepaid_postpaid_topup_account/', $data);
     }
 }
