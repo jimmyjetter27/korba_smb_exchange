@@ -1330,9 +1330,9 @@ class XChangeV1 extends API
 
 
     // Hubtel ECG Endpoints
-    public function ecg_prepaid_postpaid_account_inquiry($power_app_number)
+    public function ecg_prepaid_postpaid_account_inquiry($meter_number)
     {
-        $data = ['power_app_number' => $power_app_number];
+        $data = ['power_app_number' => $meter_number];
         return $this->call('ecg_prepaid_postpaid_account_inquiry/', $data);
     }
 
