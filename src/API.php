@@ -101,7 +101,7 @@ class API
         return $result;
     }
 
-    protected function brassica_exchange($endpoint, $payload, $request_type, $authentication_code, $timeout = 0, $connection_timeout = 300)
+    protected function brassica_exchange($endpoint, $payload, $request_type, $authentication_code, $client_id, $timeout = 0, $connection_timeout = 300)
     {
         if (empty(env('LIVE_URL'))) {
             return ['success' => false, 'message' => 'Exchange URL is not set'];
@@ -110,7 +110,7 @@ class API
         $url = env('LIVE_URL') . '/' . $endpoint;
 //        $proxy_url = env('EXCHANGE_PROXY_URL');
         $proxy_url = '';
-        $payload = array_merge($payload, ['client_id' => env('EXCHANGE_DEFAULT_CLIENT_ID')]);
+        $payload = array_merge($payload, ['client_id' => $client_id]);
 
         $res = Http::withHeaders([
             'Authorization' => 'HMAC ' . $authentication_code,
