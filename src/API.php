@@ -107,7 +107,7 @@ class API
             return ['success' => false, 'message' => 'Exchange URL is not set'];
         }
 
-        $url = env('LIVE_URL') . '/' . $endpoint;
+        $url = 'https://xchange.korba365.com/api/v1.0/' . $endpoint;
         Log::info('CLIENT_ID: '.$client_id);
         Log::info('EXCHANGE_URL: '.$url);
 //        $proxy_url = env('EXCHANGE_PROXY_URL');
