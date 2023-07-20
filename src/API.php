@@ -103,15 +103,17 @@ class API
 
     protected function brassica_exchange($endpoint, $payload, $request_type, $authentication_code, $client_id, $timeout = 0, $connection_timeout = 300)
     {
-        if (empty(env('LIVE_URL'))) {
-            return ['success' => false, 'message' => 'Exchange URL is not set'];
+        if (env('API_MODE') == 'test') {
+            $base_url = env('TEST_URL');
+//            return ['success' => false, 'message' => 'Exchange URL is not set'];
+        } else {
+            $base_url = env('LIVE_URL');
         }
 
-        $url = env('TEST_URL') . '/' . $endpoint;
+        $url = $base_url . '/' . $endpoint;
         Log::info('CLIENT_ID: '.$client_id);
         Log::info('EXCHANGE_URL: '.$url);
-//        $proxy_url = env('EXCHANGE_PROXY_URL');
-        $proxy_url = '';
+        $proxy_url = env('EXCHANGE_PROXY_URL');
         $payload = array_merge($payload, ['client_id' => $client_id]);
 
         $res = Http::withHeaders([
