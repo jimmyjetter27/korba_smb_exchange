@@ -123,10 +123,9 @@ class API
                 'verify' => false
             ])
             ->timeout($timeout)
-            ->connectTimeout($connection_timeout)
+//            ->connectTimeout($connection_timeout)
             ->$request_type($url, $payload);
         return $res;
-        return json_decode($res, true);
     }
 
     protected function networkLookup($phoneNumber)
