@@ -110,6 +110,7 @@ class API
             $base_url = env('LIVE_URL');
         }
 
+
         $url = $base_url . '/' . $endpoint;
         Log::info('CLIENT_ID: '.$client_id);
         Log::info('EXCHANGE_URL: '.$url);
