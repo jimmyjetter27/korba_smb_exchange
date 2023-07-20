@@ -101,6 +101,34 @@ class API
         return $result;
     }
 
+    protected function brassica_exchange($endpoint, $payload, $request_type, $authentication_code, $timeout = 0, $connection_timeout = 300)
+    {
+        if (empty(env('LIVE_URL'))) {
+            return ['success' => false, 'message' => 'Exchange URL is not set'];
+        }
+
+        $url = env('LIVE_URL') . '/' . $endpoint;
+//        $proxy_url = env('EXCHANGE_PROXY_URL');
+        $proxy_url = '';
+        $payload = array_merge($payload, ['client_id' => env('EXCHANGE_DEFAULT_CLIENT_ID')]);
+
+        $res = Http::withHeaders([
+            'Authorization' => 'HMAC ' . $authentication_code,
+            'Content-Type' => 'application/json'
+        ])
+            ->withOptions([
+                // add proxy if proxy url is set
+                'proxy' => $proxy_url ?: null,
+                'debug' => fopen('php://stderr', 'w'),
+                'verify' => false
+            ])
+            ->timeout($timeout)
+            ->connectTimeout($connection_timeout)
+            ->$request_type($url, $payload);
+        return $res;
+        return json_decode($res, true);
+    }
+
     protected function networkLookup($phoneNumber)
     {
         if (empty(env('EPESEWA_BASE_URL'))) {
