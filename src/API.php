@@ -103,6 +103,7 @@ class API
 
     protected function brassica_exchange($endpoint, $payload, $request_type, $authentication_code, $client_id, $timeout = 0, $connection_timeout = 300)
     {
+        Log::info('CLIENT_ID: '.$client_id);
         if (empty(env('LIVE_URL'))) {
             return ['success' => false, 'message' => 'Exchange URL is not set'];
         }
