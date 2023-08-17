@@ -1287,7 +1287,7 @@ class XChangeV1 extends API
 
     public function brassica_vending_prepaid_inquiry(
         $meter_serial, $meter_provider, $region_id,
-        $district_id, array $card_buffer, $meter_model, $card_id)
+        $district_id, $card_buffer, $meter_model, $card_id)
     {
         $data = [
             'meter_serial' => $meter_serial,
