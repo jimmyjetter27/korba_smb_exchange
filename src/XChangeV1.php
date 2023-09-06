@@ -55,6 +55,11 @@ class XChangeV1 extends API
         $i = 0;
         ksort($data);
         foreach ($data as $key => $value) {
+            // Check if value is an array and convert it to a string representation
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
+
             $message .= ($i == 0) ? "{$key}={$value}" : "&{$key}={$value}";
             $i++;
         }
@@ -1285,6 +1290,9 @@ class XChangeV1 extends API
         $meter_serial, $meter_provider, $region_id,
         $district_id, $card_buffer, $meter_model, $card_id)
     {
+        if (is_object($card_buffer)) {
+            $card_buffer = (array) $card_buffer;
+        }
         $data = [
             'meter_serial' => $meter_serial,
             'meter_provider' => $meter_provider,
