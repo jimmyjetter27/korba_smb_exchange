@@ -1295,6 +1295,7 @@ class XChangeV1 extends API
             'card_id' => $card_id ?? ''
         ];
 
+        Log::info('INQUIRY_PREPAID: '.json_encode($data));
 //        return parent::brassica_exchange(
 //            'ecg_vending_prepaid_inquiry/', $data, 'post', $this->getHmacValue($data), $this->client_id);
         return $this->call('ecg_vending_prepaid_inquiry/', $data);
