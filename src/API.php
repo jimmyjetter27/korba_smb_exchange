@@ -96,7 +96,6 @@ class API
      * @return bool|string|array
      */
     protected function call($endpoint, $data, $extra_headers = null, $timeout = 0, $connection_timeout = 300) {
-        Log::info('REQUEST_PAYLOAD: '.json_encode($data));
         $res = (gettype($data) == 'array') ? $this->engine($endpoint, json_encode($data), $extra_headers, $timeout, $connection_timeout) : $this->engine($endpoint, $data, $extra_headers, $timeout, $connection_timeout);
         $result = json_decode($res, true);
         Log::info('RESPONSE: '.json_encode($result));

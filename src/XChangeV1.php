@@ -783,7 +783,7 @@ class XChangeV1 extends API
             'payment_mode' => $payment_mode,
             'description' => $description
         ];
-        Log::info('VODAFONE_BILL_PAYMENT_PAYLOAD: '.json_encode($data));
+        Log::info('VODAFONE_BILL_PAYMENT_PAYLOAD: ' . json_encode($data));
         return $this->call('vodafone_bill_payment/do_payment/', $data);
     }
 
@@ -1296,55 +1296,59 @@ class XChangeV1 extends API
             'card_id' => $card_id ?? ''
         ];
 
-        Log::info('INQUIRY_PREPAID: '.json_encode($data));
+        Log::info('INQUIRY_PREPAID: ' . json_encode($data));
 //        return parent::brassica_exchange(
 //            'ecg_vending_prepaid_inquiry/', $data, 'post', $this->getHmacValue($data), $this->client_id);
         return $this->call('ecg_vending_prepaid_inquiry/', $data);
     }
 
     public function brassica_vending_prepaid_charge(
-        $meter_serial, $meter_provider, $region_id, $district_id,
-        $card_buffer, $meter_model, $card_id, $amount, $consumer_version,
-        $approval_code, $external_transaction_id, $description = null
+        $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
+        $card_buffer, $external_transaction_id, $amount, $customer_name, $approval_code = null, $meter_model = null, $card_id = null, $consumer_version = null,
+        $description = null,
     )
     {
         $data = [
             'meter_serial' => $meter_serial,
+            'meter_number' => $meter_number,
             'meter_provider' => $meter_provider,
             'region_id' => $region_id,
             'district_id' => $district_id,
             'card_buffer' => $card_buffer,
-            'meter_model' => $meter_model,
-            'card_id' => $card_id,
-            'amount' => $amount,
-            'consumer_version' => $consumer_version ?? '',
-            'approval_code' => $approval_code ?? '',
             'external_transaction_id' => $external_transaction_id,
-            'description' => $description
+            'amount' => $amount,
+            'customer_name' => $customer_name,
+            'approval_code' => $approval_code ?? '',
+            'meter_model' => $meter_model ?? '',
+            'card_id' => $card_id ?? '',
+            'consumer_version' => $consumer_version ?? '',
+            'description' => $description ?? ''
         ];
         return $this->call('ecg_vending_prepaid_charge/', $data);
     }
 
     public function brassica_vending_prepaid_repair(
-        $meter_serial, $meter_provider, $region_id, $district_id,
-        $card_buffer, $meter_model, $card_id,
-        $amount, $consumer_version, $approval_code,
-        $external_transaction_id, $description
+        $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
+        $card_buffer, $external_transaction_id, $amount, $customer_name, $meter_model = null, $card_id = null,
+        $consumer_version = null, $approval_code = null,
+        $description = null,
     )
     {
         $data = [
             'meter_serial' => $meter_serial,
+            'meter_number' => $meter_number,
             'meter_provider' => $meter_provider,
             'region_id' => $region_id,
             'district_id' => $district_id,
             'card_buffer' => $card_buffer,
-            'meter_model' => $meter_model,
-            'card_id' => $card_id,
-            'amount' => $amount,
-            'consumer_version' => $consumer_version,
-            'approval_code' => $approval_code,
             'external_transaction_id' => $external_transaction_id,
-            'description' => $description
+            'amount' => $amount,
+            'customer_name' => $customer_name,
+            'meter_model' => $meter_model ?? '',
+            'card_id' => $card_id ?? '',
+            'consumer_version' => $consumer_version ?? '',
+            'approval_code' => $approval_code ?? '',
+            'description' => $description ?? ''
         ];
         return $this->call('ecg_vending_prepaid_repair/', $data);
     }
