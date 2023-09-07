@@ -58,6 +58,7 @@ class API
      */
 
     private function engine($end_point, $data = null, $extra_headers = null, $timeout = 0, $connection_timeout = 300) {
+        Log::info('EXCHANGE_URL: '.$this->base_url.'/'.$end_point);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "{$this->base_url}/{$end_point}");
         if ($data != null) {
