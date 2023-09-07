@@ -1304,7 +1304,7 @@ class XChangeV1 extends API
 
     public function brassica_vending_prepaid_charge(
         $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
-        $card_buffer, $external_transaction_id, $amount, $customer_name, $approval_code = null, $meter_model = null, $card_id = null, $consumer_version = null,
+        $card_buffer, $external_transaction_id, $amount, $customer_name, $callback_url, $approval_code = null, $meter_model = null, $card_id = null, $consumer_version = null,
         $description = null,
     )
     {
@@ -1318,6 +1318,7 @@ class XChangeV1 extends API
             'transaction_id' => $external_transaction_id,
             'amount' => $amount,
             'customer_name' => $customer_name,
+            'callback_url' => $callback_url,
             'approval_code' => $approval_code ?? '',
             'meter_model' => $meter_model ?? '',
             'card_id' => $card_id ?? '',
@@ -1329,7 +1330,7 @@ class XChangeV1 extends API
 
     public function brassica_vending_prepaid_repair(
         $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
-        $card_buffer, $external_transaction_id, $amount, $customer_name, $meter_model = null, $card_id = null,
+        $card_buffer, $external_transaction_id, $amount, $customer_name, $callback_url, $meter_model = null, $card_id = null,
         $consumer_version = null, $approval_code = null,
         $description = null,
     )
@@ -1344,6 +1345,7 @@ class XChangeV1 extends API
             'transaction_id' => $external_transaction_id,
             'amount' => $amount,
             'customer_name' => $customer_name,
+            'callback_url' => $callback_url,
             'meter_model' => $meter_model ?? '',
             'card_id' => $card_id ?? '',
             'consumer_version' => $consumer_version ?? '',
