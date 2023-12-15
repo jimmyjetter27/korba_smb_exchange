@@ -1381,4 +1381,48 @@ class XChangeV1 extends API
         $this->add_optional_data($data, $opt_data);
         return $this->call('ecg_prepaid_postpaid_topup_account/', $data);
     }
+
+    public function ecg_direct_meter_detail($phone_number)
+    {
+        $data = ['phone_number' => $phone_number];
+        return $this->call('ecg_direct_meter_detail/', $data);
+    }
+
+    public function ecg_direct_service_status($meter_id)
+    {
+        $data = ['meter_id' => $meter_id];
+        return $this->call('ecg_direct_service_status/', $data);
+    }
+
+    public function ecg_direct_add_meter($alias, $meter_number, $meter_category, $phone_number, $account_number = null)
+    {
+        $data = [
+            'alias' => $alias,
+            'meter_number' => $meter_number,
+            'phone_number' => $phone_number,
+            'meter_category' => $meter_category
+        ];
+
+        $opt_data = [
+            'account_number' => $account_number
+        ];
+
+        $this->add_optional_data($data, $opt_data);
+        return $this->call('ecg_direct_add_meter/', $data);
+    }
+
+    public function ecg_direct_pay_bill($meter_id, $amount, $transaction_id, $callback_url, $description = null)
+    {
+        $data = [
+            'meter_id' => $meter_id,
+            'amount' => $amount,
+            'transaction_id' => $transaction_id,
+            'callback_url' => $callback_url,
+        ];
+
+        $opt_data = ['description' => $description];
+
+        $this->add_optional_data($data, $opt_data);
+        return $this->call('ecg_direct_pay_bill/', $data);
+    }
 }
