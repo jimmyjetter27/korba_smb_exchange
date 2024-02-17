@@ -1426,8 +1426,4 @@ class XChangeV1 extends API
         return $this->call('ecg_direct_pay_bill/', $data);
     }
 
-    public function jhoy_function()
-    {
-
-    }
 }
