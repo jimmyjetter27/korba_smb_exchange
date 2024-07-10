@@ -25,8 +25,8 @@ class XChangeV1 extends API
     protected $secret_key;
     protected $client_key;
     protected $client_id;
-//    protected static $live_url = 'https://xchange.korbaweb.com/api/v1.0';
-//    protected static $aws_url = 'http://internal-awseb-e-e-awsebloa-kxexw3t2bgt7-1521297916.eu-west-1.elb.amazonaws.com/api/v1.0';
+    //    protected static $live_url = 'https://xchange.korbaweb.com/api/v1.0';
+    //    protected static $aws_url = 'http://internal-awseb-e-e-awsebloa-kxexw3t2bgt7-1521297916.eu-west-1.elb.amazonaws.com/api/v1.0';
 
     public function __construct($secret_key, $client_key, $client_id, $mode = 'test', $proxy = null)
     {
@@ -110,9 +110,17 @@ class XChangeV1 extends API
     }
 
     public function collect(
-        $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $vodafone_voucher_code = null, $description = null, $payer_name = null, $extra_info = null, $redirect_url = null)
-    {
+        $customer_number,
+        $amount,
+        $transaction_id,
+        $network_code,
+        $callback_url,
+        $vodafone_voucher_code = null,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null,
+        $redirect_url = null
+    ) {
         $data = [
             'customer_number' => Util::numberGHFormat($customer_number),
             'amount' => $amount,
@@ -126,9 +134,9 @@ class XChangeV1 extends API
             'payer_name' => $payer_name,
             'extra_info' => $extra_info,
             'redirect_url' => $redirect_url
-//            'is_ussd' => $is_ussd
+            //            'is_ussd' => $is_ussd
         ];
-//        dd(['collection_payload: '.json_encode(array_merge($data, $opt_data))]);
+        //        dd(['collection_payload: '.json_encode(array_merge($data, $opt_data))]);
         Log::info('collection_payload: ' . json_encode(array_merge($data, $opt_data)));
         $this->add_optional_data($data, $opt_data);
         return $this->call('collect/', $data);
@@ -158,15 +166,26 @@ class XChangeV1 extends API
     }
 
     public function disburse(
-        $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $description = null, $extra_info = null, $bank_account_number = null, $bank_account_name = null,
-        $bank_name = null, $bank_branch_name = null, $payer_name = null, $payer_mobile = null, $bank_code = null)
-    {
+        $customer_number,
+        $amount,
+        $transaction_id,
+        $network_code,
+        $callback_url,
+        $description = null,
+        $extra_info = null,
+        $bank_account_number = null,
+        $bank_account_name = null,
+        $bank_name = null,
+        $bank_branch_name = null,
+        $payer_name = null,
+        $payer_mobile = null,
+        $bank_code = null
+    ) {
 
         if ($network_code == 'ISP') // bank disbursement
         {
             $data = [
-//                'customer_number' => $customer_number,
+                //                'customer_number' => $customer_number,
                 'amount' => $amount,
                 'transaction_id' => $transaction_id,
                 'network_code' => $network_code,
@@ -181,7 +200,7 @@ class XChangeV1 extends API
                 'recipient_bank_name' => $bank_name,
                 'bank_account_number' => $bank_account_number,
                 'bank_account_name' => $bank_account_name,
-//                'bank_branch_name' => $bank_branch_name,
+                //                'bank_branch_name' => $bank_branch_name,
             ];
         } else { // Mobile money disbursement
             $data = [
@@ -205,9 +224,15 @@ class XChangeV1 extends API
     }
 
     public function top_up(
-        $customer_number, $amount, $transaction_id, $network_code, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $amount,
+        $transaction_id,
+        $network_code,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
@@ -225,9 +250,15 @@ class XChangeV1 extends API
     }
 
     private function internet_bundle_data(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'transaction_id' => $transaction_id,
@@ -245,32 +276,71 @@ class XChangeV1 extends API
     }
 
     public function surfline_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('purchase_surfline_bundle/', $data);
     }
 
     public function surfline_new_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('new_purchase_surfline/', $data);
     }
 
     public function surfline_final_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('purchase_final_surfline_bundle/', $data);
     }
 
@@ -330,7 +400,7 @@ class XChangeV1 extends API
             'customer_number' => $customer_number
         ];
         $result = $this->call('get_final_surfline_bundles/', $data);
-//        return $result;
+        //        return $result;
         if (isset($result['success']) && $result['success'] && in_array($filter, array('AlwaysON', 'Unlimited', 'AllWeather'))) {
             $list = [];
             if (isset($result['bundles'][$filter])) {
@@ -352,22 +422,48 @@ class XChangeV1 extends API
     }
 
     public function busy_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('purchase_busy_bundle/', $data);
     }
 
     public function busy_updated_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('updated_purchase_busy_bundle/', $data);
     }
 
@@ -424,7 +520,7 @@ class XChangeV1 extends API
         $data = [
             'customer_number' => $customer_number
         ];
-//        $result = $this->call('get_updated_busy_bundles/', $data);
+        //        $result = $this->call('get_updated_busy_bundles/', $data);
         $result = $this->call('get_updated_busy_bundles/', $data);
         if (isset($result['success']) && $result['success']) {
             $list = [];
@@ -457,12 +553,25 @@ class XChangeV1 extends API
     }
 
     public function telesol_purchase(
-        $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_bundle_data(
-            $customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $bundle_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('purchase_telesol_bundle/', $data);
     }
 
@@ -472,9 +581,14 @@ class XChangeV1 extends API
     }
 
     public function ecg_pay(
-        $customer_number, $transaction_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'transaction_id' => $transaction_id,
@@ -506,7 +620,7 @@ class XChangeV1 extends API
             'transaction_id' => $transaction_id,
             'amount' => $amount,
             'callback_url' => $callback_url,
-//            'gwcl_lookup_session_id' => $gwcl_transaction_id,
+            //            'gwcl_lookup_session_id' => $gwcl_transaction_id,
         ];
         $opt_data = ['description' => $description];
         $this->add_optional_data($data, $opt_data);
@@ -514,9 +628,15 @@ class XChangeV1 extends API
     }
 
     private function internet_product_data(
-        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $product_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'transaction_id' => $transaction_id,
@@ -534,12 +654,25 @@ class XChangeV1 extends API
     }
 
     public function mtn_purchase(
-        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $product_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_product_data(
-            $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $product_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('mtn_data_topup/', $data);
     }
 
@@ -548,21 +681,21 @@ class XChangeV1 extends API
         $result = $this->call('get_mtndata_product_id/', []);
         $list = [];
         if (isset($result['success']) && $result['success']) {
-//            foreach ($result['bundles'][0]['bundles'] as $bundle) {
+            //            foreach ($result['bundles'][0]['bundles'] as $bundle) {
             foreach ($result['bundles'] as $bundle) {
                 foreach ($bundle['bundles'] as $data) {
 
                     $list[] = [
-//                    $bundle
+                        //                    $bundle
                         'name' => $bundle['name'],
                         'id' => $data['product_id'],
-//                    'description' => "{$data['name']} @ GHC {$data['amount']}",
+                        //                    'description' => "{$data['name']} @ GHC {$data['amount']}",
                         'description' => "{$data['name']}",
                         'price' => $data['amount'],
-//                    'volume' => $data['volume'],
-//                    'validity' => $data['validity'],
+                        //                    'volume' => $data['volume'],
+                        //                    'validity' => $data['validity'],
 
-//                    'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
+                        //                    'short_description' => preg_replace('/^MTN ((Daily)|(Weekly)|(Monthly)|(YouTube)) Data Bundle /', '', $bundle['name'],)
                     ];
                 }
             }
@@ -601,12 +734,25 @@ class XChangeV1 extends API
     }
 
     public function mtn_fibre_purchase(
-        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $product_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_product_data(
-            $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $product_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('mtn_fibre_topup/', $data);
     }
 
@@ -619,7 +765,7 @@ class XChangeV1 extends API
                 array_push($list, [
                     'id' => $bundle['product_id'],
                     'price' => $bundle['amount'],
-//                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
+                    //                    'description' => "{$bundle['name']} - GHC " . preg_replace('/.00/', '', $bundle['amount'])
                     'description' => "{$bundle['name']} - GHC {$bundle['amount']}"
                 ]);
             }
@@ -679,7 +825,7 @@ class XChangeV1 extends API
                 $list[] = [
                     'id' => $bundle['bundle_id'],
                     'price' => $bundle['amount'],
-//                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                    //                    'description' => " {$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                     'description' => $bundle['validity'] == 'No Expiry' ?
                         "{$bundle['bundle_size']} @ GHC {$bundle['amount']}" :
                         "{$bundle['bundle_size']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
@@ -712,9 +858,15 @@ class XChangeV1 extends API
         $response = self::new_vodafone_bundles();
     }
 
-    public function vodafone_purchase($customer_number, $transaction_id, $amount, $callback_url,
-                                      $description = null, $payer_name = null, $extra_info = null)
-    {
+    public function vodafone_purchase(
+        $customer_number,
+        $transaction_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'transaction_id' => $transaction_id,
@@ -730,9 +882,16 @@ class XChangeV1 extends API
         return $this->call('vodafone_data_topup/', $data);
     }
 
-    public function new_vodafone_purchase($customer_number, $transaction_id, $bundle_id, $amount, $callback_url,
-                                          $description = null, $payer_name = null, $extra_info = null)
-    {
+    public function new_vodafone_purchase(
+        $customer_number,
+        $transaction_id,
+        $bundle_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'transaction_id' => $transaction_id,
@@ -789,12 +948,25 @@ class XChangeV1 extends API
 
 
     public function airteltigo_purchase(
-        $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $product_id,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = $this->internet_product_data(
-            $customer_number, $transaction_id, $product_id, $amount, $callback_url,
-            $description, $payer_name, $extra_info);
+            $customer_number,
+            $transaction_id,
+            $product_id,
+            $amount,
+            $callback_url,
+            $description,
+            $payer_name,
+            $extra_info
+        );
         return $this->call('airteltigo_data_topup/', $data);
     }
 
@@ -812,11 +984,11 @@ class XChangeV1 extends API
 
     public function airteltigo_bundles($filter = null)
     {
-//        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
+        //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
         $list = [];
         if (isset($result['success']) && $result['success'] == true) {
-//            return $result;
+            //            return $result;
             foreach ($result['results'] as $result) {
                 foreach ($result['bundles'] as $bundle) {
                     array_push($list, [
@@ -920,7 +1092,7 @@ class XChangeV1 extends API
             foreach ($result['results'] as $bundle) {
                 array_push($list, [
                     'id' => $bundle['productId'],
-//                    'description' => $bundle['name'],
+                    //                    'description' => $bundle['name'],
                     'description' => "{$bundle['name']} @ GHC {$bundle['price']} - {$bundle['validity']}",
                     'price' => $bundle['price'],
                     'volume' => $bundle['volume'],
@@ -949,7 +1121,7 @@ class XChangeV1 extends API
         $opt_data = ['description' => $description];
         $this->add_optional_data($data, $opt_data);
 
-//        $result = $this->call('glo_data_purchase/', $data);
+        //        $result = $this->call('glo_data_purchase/', $data);
         $result = $this->call('new_glo_data_purchase/', $data);
         return $result;
     }
@@ -988,8 +1160,8 @@ class XChangeV1 extends API
             'transaction_id' => $transaction_id
         ];
         return $this->call('utilities_validate_user/', $data);
-//        $result = $this->call('new_etransact_validate_user/', $data);
-//        Log::debug(json_encode($result));
+        //        $result = $this->call('new_etransact_validate_user/', $data);
+        //        Log::debug(json_encode($result));
     }
 
     public function prepaid_lookup($meter_code)
@@ -1107,7 +1279,7 @@ class XChangeV1 extends API
         $data = [
             'customer_number' => $customer_number,
             'amount' => $amount,
-//            'external_transaction_id' => $transaction_id,
+            //            'external_transaction_id' => $transaction_id,
             'policy_phone_number' => $policy_phone_number,
             'policy_number' => $policy_number,
             'transaction_id' => $transaction_id,
@@ -1128,9 +1300,17 @@ class XChangeV1 extends API
     }
 
     public function etransact_pay(
-        $customer_number, $bill_type, $transaction_id, $sender_name, $address, $amount, $callback_url,
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $bill_type,
+        $transaction_id,
+        $sender_name,
+        $address,
+        $amount,
+        $callback_url,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'bill_type' => $bill_type,
@@ -1150,9 +1330,18 @@ class XChangeV1 extends API
     }
 
     public function new_etransact_pay(
-        $customer_number, $bill_type, $transaction_id, $sender_name, $address, $amount, $callback_url,
-        $customer_phone = null, $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $bill_type,
+        $transaction_id,
+        $sender_name,
+        $address,
+        $amount,
+        $callback_url,
+        $customer_phone = null,
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => $customer_number,
             'bill_type' => $bill_type,
@@ -1181,10 +1370,20 @@ class XChangeV1 extends API
     }
 
     public function mtn_recurring_create_mandate(
-        $customer_number, $transaction_id, $amount, $mandate_creation_callback_url, $debit_customer_callback_url,
-        $debit_day, $frequency_type, $frequency = 1, $start_date = 'today', $end_date = 'infinite',
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $amount,
+        $mandate_creation_callback_url,
+        $debit_customer_callback_url,
+        $debit_day,
+        $frequency_type,
+        $frequency = 1,
+        $start_date = 'today',
+        $end_date = 'infinite',
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => Util::number233Format($customer_number),
             'transaction_id' => $transaction_id,
@@ -1207,10 +1406,19 @@ class XChangeV1 extends API
     }
 
     public function mtn_recurring_update_mandate(
-        $customer_number, $transaction_id, $amount, $mandate_id,
-        $debit_day, $frequency_type, $frequency = 1, $start_date = 'today', $end_date = 'infinite',
-        $description = null, $payer_name = null, $extra_info = null)
-    {
+        $customer_number,
+        $transaction_id,
+        $amount,
+        $mandate_id,
+        $debit_day,
+        $frequency_type,
+        $frequency = 1,
+        $start_date = 'today',
+        $end_date = 'infinite',
+        $description = null,
+        $payer_name = null,
+        $extra_info = null
+    ) {
         $data = [
             'customer_number' => Util::number233Format($customer_number),
             'transaction_id' => $transaction_id,
@@ -1268,7 +1476,7 @@ class XChangeV1 extends API
 
     public function authorized_customer_lookup($bank_account_number, $bank_code)
     {
-//        $data = ['bank_code' => $bank_code, 'bank_account_number' => $bank_account_number];
+        //        $data = ['bank_code' => $bank_code, 'bank_account_number' => $bank_account_number];
         $data = ['bank_code' => $bank_code, 'customer_number' => $bank_account_number];
         return $this->call('authorized_customer_lookup/', $data);
     }
@@ -1282,9 +1490,14 @@ class XChangeV1 extends API
     }
 
     public function brassica_vending_prepaid_inquiry(
-        $meter_serial, $meter_provider, $region_id,
-        $district_id, $card_buffer, $meter_model, $card_id)
-    {
+        $meter_serial,
+        $meter_provider,
+        $region_id,
+        $district_id,
+        $card_buffer,
+        $meter_model,
+        $card_id
+    ) {
 
         $data = [
             'meter_serial' => $meter_serial,
@@ -1297,17 +1510,28 @@ class XChangeV1 extends API
         ];
 
         Log::info('INQUIRY_PREPAID: ' . json_encode($data));
-//        return parent::brassica_exchange(
-//            'ecg_vending_prepaid_inquiry/', $data, 'post', $this->getHmacValue($data), $this->client_id);
+        //        return parent::brassica_exchange(
+        //            'ecg_vending_prepaid_inquiry/', $data, 'post', $this->getHmacValue($data), $this->client_id);
         return $this->call('ecg_vending_prepaid_inquiry/', $data);
     }
 
     public function brassica_vending_prepaid_charge(
-        $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
-        $card_buffer, $external_transaction_id, $amount, $customer_name, $callback_url, $approval_code = null, $meter_model = null, $card_id = null, $consumer_version = null,
+        $meter_serial,
+        $meter_number,
+        $meter_provider,
+        $region_id,
+        $district_id,
+        $card_buffer,
+        $external_transaction_id,
+        $amount,
+        $customer_name,
+        $callback_url,
+        $approval_code = null,
+        $meter_model = null,
+        $card_id = null,
+        $consumer_version = null,
         $description = null,
-    )
-    {
+    ) {
         $data = [
             'meter_serial' => $meter_serial,
             'meter_number' => $meter_number,
@@ -1317,7 +1541,7 @@ class XChangeV1 extends API
             'card_buffer' => $card_buffer,
             'transaction_id' => $external_transaction_id,
             'amount' => $amount,
-//            'charge_value' => $amount,
+            //            'charge_value' => $amount,
             'customer_name' => $customer_name,
             'callback_url' => $callback_url,
             'approval_code' => $approval_code ?? '',
@@ -1330,12 +1554,22 @@ class XChangeV1 extends API
     }
 
     public function brassica_vending_prepaid_repair(
-        $meter_serial, $meter_number, $meter_provider, $region_id, $district_id,
-        $card_buffer, $external_transaction_id, $amount, $customer_name, $callback_url, $meter_model = null, $card_id = null,
-        $consumer_version = null, $approval_code = null,
+        $meter_serial,
+        $meter_number,
+        $meter_provider,
+        $region_id,
+        $district_id,
+        $card_buffer,
+        $external_transaction_id,
+        $amount,
+        $customer_name,
+        $callback_url,
+        $meter_model = null,
+        $card_id = null,
+        $consumer_version = null,
+        $approval_code = null,
         $description = null,
-    )
-    {
+    ) {
         $data = [
             'meter_serial' => $meter_serial,
             'meter_number' => $meter_number,
@@ -1345,7 +1579,7 @@ class XChangeV1 extends API
             'card_buffer' => $card_buffer,
             'transaction_id' => $external_transaction_id,
             'amount' => $amount,
-//            'charge_value' => $amount,
+            //            'charge_value' => $amount,
             'customer_name' => $customer_name,
             'callback_url' => $callback_url,
             'meter_model' => $meter_model ?? '',
@@ -1411,13 +1645,14 @@ class XChangeV1 extends API
         return $this->call('ecg_direct_add_meter/', $data);
     }
 
-    public function ecg_direct_pay_bill($meter_id, $amount, $transaction_id, $callback_url, $description = null)
+    public function ecg_direct_pay_bill($meter_id, $amount, $transaction_id, $callback_url, $description = null, $meter_number)
     {
         $data = [
             'meter_id' => $meter_id,
             'amount' => $amount,
             'transaction_id' => $transaction_id,
             'callback_url' => $callback_url,
+            'meter_number' => $meter_number
         ];
 
         $opt_data = ['description' => $description];
@@ -1425,5 +1660,4 @@ class XChangeV1 extends API
         $this->add_optional_data($data, $opt_data);
         return $this->call('ecg_direct_pay_bill/', $data);
     }
-
 }
