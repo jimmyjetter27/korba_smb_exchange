@@ -991,13 +991,15 @@ class XChangeV1 extends API
             //            return $result;
             foreach ($result['results'] as $result) {
                 foreach ($result['bundles'] as $bundle) {
+                      $package =  explode(' ', $bundle['name']);
+                    $package_name = str_replace('@', '', end($package));
                     array_push($list, [
                         'package_name' => $result['name'], // eg, morning rush
                         'id' => $bundle['product_id'],
                         'price' => $bundle['amount'],
                         'description' => $bundle['validity'] == null ?
-                            "{$bundle['name']} @ GHC {$bundle['amount']}" :
-                            "{$bundle['name']} @ GHC {$bundle['amount']} - {$bundle['validity']}",
+                          "{$package_name} @ GHC {$bundle['amount']}" :
+                            "{$package_name} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                         'size' => $bundle['name'],
                         'validity' => $bundle['validity'],
                     ]);
