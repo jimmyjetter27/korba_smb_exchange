@@ -984,21 +984,21 @@ class XChangeV1 extends API
 
     public function airteltigo_bundles($filter = null)
     {
-        //        $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
+        //  $result = $this->call('get_airteltigodata_product_id/', []); // old endpoint
         $result = $this->call('get_airteltigo_internet_bundles/', []); // new endpoint for bundles
         $list = [];
         if (isset($result['success']) && $result['success'] == true) {
             //            return $result;
             foreach ($result['results'] as $result) {
                 foreach ($result['bundles'] as $bundle) {
-                      $package =  explode(' ', $bundle['name']);
+                    $package =  explode(' ', $bundle['name']);
                     $package_name = str_replace('@', '', end($package));
                     array_push($list, [
                         'package_name' => $result['name'], // eg, morning rush
                         'id' => $bundle['product_id'],
                         'price' => $bundle['amount'],
                         'description' => $bundle['validity'] == null ?
-                          "{$package_name} @ GHC {$bundle['amount']}" :
+                            "{$package_name} @ GHC {$bundle['amount']}" :
                             "{$package_name} @ GHC {$bundle['amount']} - {$bundle['validity']}",
                         'size' => $bundle['name'],
                         'validity' => $bundle['validity'],
