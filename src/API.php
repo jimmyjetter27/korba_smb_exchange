@@ -160,7 +160,7 @@ class API
 
         $data = json_decode($response, true);
         if (isset($data['success']) && $data['success'] == true) {
-            if ($data['network'] == 'Vodafone') {
+            if ($data['network'] == 'Telecel') {
                 $data['network'] = 'VOD';
             } else if ($data['network'] == 'AirtelTigo') {
                 $data['network'] = 'AIR';
