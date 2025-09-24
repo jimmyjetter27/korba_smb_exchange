@@ -120,8 +120,8 @@ class XChangeV1 extends API
         $payer_name = null,
         $extra_info = null,
         $redirect_url = null,
-        delay_prompt,
-        delay_seconds
+        $delay_prompt,
+        $delay_seconds
     ) {
         $data = [
             'customer_number' => Util::numberGHFormat($customer_number),
