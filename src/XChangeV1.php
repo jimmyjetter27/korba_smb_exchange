@@ -119,9 +119,8 @@ class XChangeV1 extends API
         $description = null,
         $payer_name = null,
         $extra_info = null,
-        $redirect_url = null,
-        $delay_prompt=false,
-        $delay_seconds=0.3    ) {
+        $redirect_url = null
+          ) {
         $data = [
             'customer_number' => Util::numberGHFormat($customer_number),
             'amount' => $amount,
@@ -134,9 +133,7 @@ class XChangeV1 extends API
             'description' => $description,
             'payer_name' => $payer_name,
             'extra_info' => $extra_info,
-            'redirect_url' => $redirect_url,
-            'delay_seconds'=>$delay_seconds,
-            'delay_prompt'=>$delay_prompt
+            'redirect_url' => $redirect_url
             //            'is_ussd' => $is_ussd
         ];
         //        dd(['collection_payload: '.json_encode(array_merge($data, $opt_data))]);
