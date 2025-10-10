@@ -1647,6 +1647,15 @@ class XChangeV1 extends API
         return $this->call('ecg_direct_add_meter/', $data);
     }
 
+    public function ecg_direct_delete_meter($meter_id)
+    {
+        $data = [
+            'meter_id' => $meter_id
+        ];
+
+        return $this->call('ecg_direct_delete_meter/', $data);
+    }
+
     public function ecg_direct_pay_bill($meter_id, $amount, $transaction_id, $callback_url, $description = null, $meter_number)
     {
         $data = [
