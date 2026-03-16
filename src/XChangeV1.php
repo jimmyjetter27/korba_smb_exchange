@@ -708,6 +708,22 @@ class XChangeV1 extends API
         }
         return $result;
     }
+        public function mtn_bundles_available()
+    {
+        $result = $this->call('get_mtndata_product_id/', []);
+        $list = [];
+        if (isset($result['success']) && $result['success']) {
+            foreach ($result['bundles'] as $bundle) {
+                $list[] = $bundle['name'];
+            }
+            $list[] = 'Flexi';
+            return [
+                'success' => true,
+                'bundles' => $list
+            ];
+        }
+        return $result;
+    }
 
     private function mtn_filter($bundles, $filter = null)
     {
